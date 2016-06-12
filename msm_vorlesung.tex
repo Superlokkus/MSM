@@ -1,0 +1,1489 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{ulem}
+\usepackage{hyperref}
+\usepackage{pgf,tikz}
+\usepackage{newtxmath}
+\usetikzlibrary{arrows}
+
+\title{Skriptum Mathematische/Stochastische Modelle}
+\date{SS 2016}
+\author{Markus Klemm.net}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\paragraph{Einführung}
+Realer Prozess $\Rightarrow$ Beobachtung $\Rightarrow$ Empirische Annahmen $\Rightarrow$ Math. Modell $\rightarrow$ Lösung $\Rightarrow$ Vorraussagen $\Rightarrow$ Beobachtung
+
+\paragraph{Beispiel} Radioaktiver Zerfall
+Annahmen:
+\subparagraph{$n$} Anzahl der Atomkerne zum Zeitpunkt $t \quad n = n(t)$
+\subparagraph{$\Delta n$} Anzahl der zerfallenen Atomkerne im Zeitraum $\Delta t$
+
+\[ \begin{array}{c} \Delta n \sim n \\ \Delta n \sim \Delta t\\ \end{array} \Rightarrow \Delta n \sim n \cdot \Delta t \Rightarrow \Delta n = - \lambda n \Delta t (\lambda > 0) \]
+\[ \frac{\Delta n}{\Delta t} = - \lambda n \quad \Delta t \rightarrow 0 \]
+\[\frac{dn}{dt} = \lim\limits_{\Delta t \rightarrow 0} \frac{\Delta n}{\Delta t} = - \lambda n\]
+\[ n' (t) = - \lambda n\]
+Diff-Gleichung 1. Ordnung, Anfangsbedingung: $n(0) = n_0$
+
+Lösung $n' + \lambda n = 0 \quad n = Ce^{-\lambda t}$ allg. Lösung ($C \in \mathbb{R}$)
+$\curvearrowright n = n(t) = n_0 e^{-\lambda t}$ ($\lambda$ - Zerfallskonstante)
+
+Halbwertszeit $n(T) = n_0 e^{-\lambda T} = \frac{n_0}{2}$\\*
+$e^{-\lambda T} = \frac{1}{2}$\\
+$-\lambda T = \ln{\frac{1}{2}} = \ln{1} - \ln{2}$\\
+$\lambda = \frac{\ln{2}}{T}$
+
+\paragraph{Deterministische Modelle} DGL
+\paragraph{Stochastische Modelle} $\sim$ Verteilungsfunktion
+\paragraph{Unscharfe Modelle} Fuzzy Logik
+
+\section{Fuzzy Logik}
+\subsection{Unscharfe Menge}
+\subsubsection{Definition und Darstellung}
+(Klassische) Menge $A$: Entweder $x \in A$ oder $x \notin A$
+\subparagraph{Beispiel} $A= \{ \text{ junge Frauen } \}$\\
+$x_n$ - $n$-jährige Frau\\
+$x_{20} \in A, x_{30} \in A (?), x_{29} \in A, x_{30} \notin A ??$\\
+Zugehörigkeitsgrad
+\begin{equation} \mu_A (x) \in [0;1] \end{equation}
+Maß für Mitgliedschaft von $x$ in $A$
+
+\subparagraph{Beispiel} $\mu_A(20) = 1, \mu_A(30) = 0,7 , \mu_a(40) = 0,3, (x_n \triangleq n )$
+
+Zugehörigkeitsfunktion $x \rightarrow (\mu_A (x),\: x \in G$
+\[ \{ (x,\mu_A(x)) : x \in G, \mu_A(x) \in [0,1] \} \]
+Unscharfe Menge $A$ oder Fuzzy Menge $A$
+\paragraph{Bezeichnungen} A,B, JUNG, ALT\dots
+\paragraph{Darstellungen}
+\begin{enumerate}
+	\item Wertetabelle \\
+	$G = \{$ Städte in D $\}$, SCHÖN $\triangleq$ "`schöne Stadt"'
+
+	$\vec{\mu_A} = (0,3;0,5;0,6;0,7)$
+	\item Analytisch (Funktionsgleichung\\
+	Beispiel $A= \text{ NAHENULL } : x \approx 0$\\
+	$\mu_A (x) = \frac{1}{1+x^2} (x \in \mathbb{R})$
+	\item Grafisch\\
+	$G: \{ \text{ Lebensalter } \} \triangleq [0,100];$ $A$-JUNG
+\end{enumerate}
+
+\paragraph{Spezielle unscharfe Mengen}
+\begin{itemize}
+	\item Leere Menge $\varnothing : \mu_\varnothing (x) = 0 \;\forall x \in G$
+	\item Universalmenge $E: \mu_E (x) = 1\; \forall x \in G$
+	\item scharfe Menge $A: \mu_A(x) = \left\{ \begin{array}{lr} 0 & x \notin A\\ 1 & x \in A \\ \end{array} \right.$
+\end{itemize}
+Symbolische Darstellung:
+\begin{enumerate}
+	\item $G$ diskret $A= \frac{\mu_1}{x_1} + \frac{\mu_2}{x_2} + \dots + \frac{\mu_n}{x_n} = \sum\limits_{i=1}^{n} \frac{\mu_i}{x_i}$
+	\item $G$ stetig $\frac{\int\limits_{x \in G} \mu_A(x)}{x}$
+\end{enumerate}
+
+\subsubsection{Einige Eigenschaften und Typen}
+Höhe einer unscharfen Menge $A$
+\[ h(A) = \sup\limits_{x \in G} \mu_A (x) \]
+$ h(A) = 1$ normalisiert
+Normalisierung
+\[ \mu_A^*(x) = \frac{\mu_A (x)}{h(A)} \]
+
+Mächtigkeit von $A$
+\begin{enumerate}
+\item $G$ endlich : $\text{card}(A) = \sum\limits_{x\in G} \mu_A (x)$
+\item $G$ unendlich: $\text{card}(A) = \int\limits_G \mu_A (x) dx$
+\end{enumerate}
+Relative Mächtigkeit
+\begin{enumerate}
+\item $\text{card}_G (A) = \frac{\text{card}(A)}{N}$, $N$ Anzahl der Elemente von G
+\item $\text{card}_G (A) = \frac{\text{card}(A)}{\int\limits_G dx}$
+\end{enumerate}
+
+$\alpha$-Niveaumenge: $A_\alpha = \{ x \in G : \mu_A (x) \geq \alpha \}, \alpha \in [0,1]$\\
+strenge $\alpha$-Niveaumenge: $A_\alpha^* = \{ x \in G : \mu_A (x) > \alpha \}$
+Träger von $A$: $\sup A = A_0^*$
+Es gilt $A$ scharfe Menge ($\neq \varnothing) \Leftrightarrow  \mu_A (x) = 1 \; \forall x \in \sup A$
+
+\paragraph{Beispiel}
+$G= \{a,b,c,d\} : A= \{a;0,9);(b;0,2);(c;0,5);(d;0,1)\}$\\
+$\alpha = 0,1 : A_{0,1} = \{a,b,c,d\}$\\
+$\alpha = 0,2 : A_{0,2} = \{a,b,c\}$\\
+$\alpha = 0,5 : A_{0,5} = \{a,c\}$\\
+$\alpha = 0,9 : A_{0,9} = \{a\}$\\
+Es gilt $\alpha_1 \leq \alpha_2 \rightarrow A_{\alpha_2} \subset A_{\alpha_1} \; \forall \alpha_1 \alpha_2 \in [0;1]$
+Repräsentationssatz
+\[ \mu_A(x) = \sup\limits_\alpha (\text{min}(\alpha;\mu_{A_\alpha} (x))\]
+Erläuterung: Beispiel siehe oben: $x=b$\\
+$\forall \alpha \in [0;0,2] : b \in A_\alpha \Rightarrow \mu_{A_\alpha} (b) = 1$\\
+$\forall \alpha \in (0,2;1) : b \notin A_\alpha \Rightarrow \mu_{A_\alpha} (b) = 0$\\
+d.h. $\text{min}(\alpha;\mu_{A_\alpha}(b)) = \alpha \text{ für } \alpha \in [0;0,2]$\\
+$\text{min}(\alpha;\mu_{A_\alpha} (b)) = 0 \text { für } \alpha \in (0,2;1]$\\
+$\curvearrowright \sup\limits_\alpha (\text{min}(\alpha;\mu_{A_\alpha} (b)) = \sup \alpha = 0,2 \quad \alpha \in [0;0,2] = \mu_A(b)$
+
+\paragraph{Wichtige Typen von Fuzzy-Mengen}
+Grundmenge $G=[a;b]$
+\begin{enumerate}
+	\item $\mu_A (x)$ monoton wachsend $\left\{ \begin{array}{c} \text{ stückweise linear} \\ \text{S-förmig} \triangleq \text{kubische Parabel} \\ \end{array}\right.$
+	\item $\mu_A (x)$ monoton fallend
+	\item $\mu_A$ dreiecksförmig
+	\item $\mu_A$ trapezförmig
+\end{enumerate}
+
+\paragraph{Analytisch}
+Geradengleichung $ \frac{\mu-\mu_1}{x-x_1} = \frac{\mu_2-\mu_1}{x_2 -x_1}$ \\
+$x \in [c_1; m] : \frac{\mu-0}{x-c_1} = \frac{1-0}{m-c_1}, \mu = \frac{x-c_1}{m-c_1}$\\
+$x\in [m;c_2] : \frac{\mu-0}{x-c_2} = \frac{1-0}{m-c_2}$\\
+$\curvearrowright \mu = \frac{x-c_2}{m-c_2} = \frac{c_2 -x}{c_2 - m}$
+$\mu_A(x)  = \left\{ \begin{array}{ccc} 0 & , & x \in [a;c_1] \cup [c_2,b] \\ \frac{x-c_1}{m-c_1} & , & x \in [c_1;m]\\ \frac{c_2-x}{c_2-m} & , & x \in [m;c_2] \\ \end{array} \right.$
+
+\subsubsection{Gleichheit und Teilmengen}
+\paragraph{Gleichheit} $A=B \Leftrightarrow \mu_A (x) = \mu_B (x) \; \forall x \in G$
+\paragraph{Teilmengen} $A \subset B \Leftrightarrow \mu_A (x) \leq \mu_B (x) \; \forall x \in G$\\
+offenbar $\varnothing \subset A \subset E \; \forall A; A \subset B \wedge B \subset A \Leftrightarrow A = B$
+
+\subparagraph{Beispiel} Wassertemperaturen im Freibad
+$G =\{ 18;19;\dots;24 \}$\\
+$\text{WARM} = \{ (18;0,2);(19;0,3);(20;0,4);(21;0,5);(22;0,7);(23;0,9);(24;1) \}$\\
+$\text{LAU} = \{(18;0,3);(19;0,4);(20;0,6);(21;0,8);(22;1);(23;1);(24;1)$
+$\Rightarrow \text{WARM} \subset \text{LAU}$\\
+Konzentrationen $\text{kon}_n \,A = \{ (x ; [\mu_A (x)]^n),x\in G\}$\\
+Dilatationen $\text{dil}_n \,A = \{(x; \sqrt[n]{\mu_A (x)}), x \in G\}$\\
+Es gilt $\text{kon}_n \, A \subset \text{kon}_m \, A \subset A \subset \text{dil}_m \, A \subset \text{dil}_n \, A$\\
+für $1 < m < n$\\
+Sprachliche Verstärkung $\Rightarrow$ numerische Abschwächung und umgekehrt
+
+\subparagraph{Beispiel} $A = \text{ NAHE NULL}$\\
+$\mu_A (x) = e^{-x^2}$\\
+$B= \text{kon}_3 \, A = [\mu_A (x) ]^3 = e^{-3x^2}$\\
+$C = \text{dil}_3 \, A = [\mu_A (x) ]^{\frac{1}{3}} = e^{-\frac{x^2}{3}}$
+
+\paragraph{Linguistische Modifikationen}
+\subparagraph{Beispiel} $A = \text{ SCHÖNE STADT}$
+
+\subsubsection{Klassische Mengenoperationen}
+Vereinigung ("`oder"'): $C = A \cup B : \mu_C (x) = \max(\mu_A(x);\mu_B(x))$\\
+Durchschnitt ("`und"'): $D = A \cap B : \mu_D (x) \min(\mu_A(x),\mu_B(x))$\\
+Komplement ("`nicht"'): $A^C = A: \mu_A^C (x) = 1 - \mu_A(x)$
+
+\subparagraph{Beispiel} Computerproduktion\\
+$G=\{ 4;5;6;7;8;9\}$\\
+Vertretbare Produktionskosten
+$A= \{ (4;0);(5;0,1);(6;0,5);(7;1);(8;0,8);(9;0)\}$\\
+Absetzbarkeit (pro Tag)
+$B= \{(4;1);(5;0,9);(6;0,8);(7;0,4);(8;0,1);(9;0)\}$
+
+\paragraph{Mengengesetze}
+\subparagraph{Anmerkung}
+\begin{enumerate}
+\item $\cap \rightarrow \cup, E \rightarrow \varnothing$
+z.B. $A \cap \varnothing = \varnothing \Leftrightarrow A \cup E = E$
+\item Nachweis, z.B. $A \cap (A \cup B) = A$\\
+tatsächlich $\mu_{LS}(x) = \min (\mu_A (x), \max (\mu_A(x),\mu_B(x))) = \mu_A(x) = \mu_{RS}(x)$\\
+Fallunterscheidung: $\mu_A (x) =: a, \mu_B (x) =:b$
+	\begin{enumerate}
+	\item $a \leq b : \mu_{LS}(x) = \min (a,\underbrace{\max (a,b)}_{=b} )  = a$
+	\item $a > b: \mu_{LS} (x) = \min (a,\underbrace{\max (a,b)}_{=a} ) = a$
+	\end{enumerate}
+\end{enumerate}
+
+\paragraph{Nicht-interaktiv}
+\subparagraph{Kartesisches Produkt} $C = A \otimes B$\\
+\[ \mu_C ((a,b)) = \min \{ \mu_A(a),\mu_B (b)\} \; \forall (a;b) \in X \times Y\]
+
+\subparagraph{Beispiel} $A = \{ (a;0,7));(c;0,8)\}, B= \{(b;1);(c;0,3)\}$\\
+$X = Y \{a;b;c\} \Rightarrow A \otimes B = \{((a;b);0,7);((a,c);0,3);((c;b);0,8);((c,c);0,3)\}$
+
+\subsection{Fuzzy-Control}
+\subsubsection{Überblick}
+\paragraph{Klassisch}
+\begin{itemize}
+\item Steuergröße $u(t)$
+\item Prozess $F(x,u,t)$
+\item Zustandsgröße $x(t)$
+\end{itemize}
+Zusätzliches Ziel
+\[ \int\limits_0^{t_1} \underbrace{f(x,u,t)}_{\text{Kostenfunktion}} \, dt \rightarrow \min\]
+
+\subparagraph{Nachteile}
+\begin{itemize}
+\item Exaktes math. Modell (F-Dgl.) oft schwierig aufzustellen, nur wichtige Zusammenhänge berücksichtigbar
+\item Lösung oft nur näherungsweise möglich
+\item keine Robustheit der Lösung
+\end{itemize}
+
+\subsubsection{Fuzzifizierung}
+\subsubsection{Inferenz}
+\paragraph{monokausal}
+\begin{enumerate}
+\item Verarbeitungsregeln\\
+\begin{tabular}{c|c}
+(Zustand) & (Steuerung)\\
+Badewasser & Zulaufwasser\\ \hline
+KÜHL & HEISS\\
+WARM & WARM\\
+HEISS & KÜHL\\
+\end{tabular}
+\item Zugehörigkeitsgrade\\
+$\mu_{KALT}(Z,W) = 0$\\
+$\mu_{KUEHL}(Z,W) = \mu_{HEISS} (32) = 0,4$\\
+$\mu_{WARM}(Z,W) = \mu_{WARM}(32) = 0,6$\\
+$\mu_{HEISS} (Z,W)  = \mu_{KUEHL} (32) = 0$\\
+\item Bestimmen der Inferenzmenge
+\end{enumerate}
+\subsubsection{Defuzzifizierung}
+\begin{enumerate}
+\item Zweidimensional
+	\begin{enumerate}
+	\item Maximum-Mittelwert-Mehtode
+	\[ u^* = \frac{\alpha + \beta}{2} = 40^\circ \]
+	\item Schwerpunktmethode
+	\[ u^* = \frac{\int\limits_a^b uf(u) \, du}{\int\limits_a^b f(u) \, du} \]
+	\end{enumerate}
+\item Eindimensional
+	\begin{enumerate}%TODO hier weiter mit von vorherigen 2.lvl enumerate zählen
+	\item Singletons
+	\[ u^* = \frac{\sum\limits_{i=1}^{n} u_i \mu_i}{\sum \mu_i} = \frac{30 \cdot 0,4 + 40 \cdot 0,6}{0,4+0,6} \]
+	\item Teilschwerpunkt = $36^\circ$
+	\[ u^* = \frac{\sum u_i \mu_i A_i g_i}{\sum \mu_i A_i g_i} \underbrace{=}_{g_i = 1} \frac{30 \cdot 0,4 \cdot 10 + 40 \cdot 0,6 \cdot 10}{0,4 \cdot 10 + 0,6 \cdot 10} = 36^\circ \]
+	\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Allgemeine Hinweise}
+Schwerpunktmethode i.A. am virteilhaftesten!
+
+Nicht-konvexe Inferenzmengen.
+\subparagraph{Beispiel} Ausweichen vor Hindernis
+\subparagraph{Fuzzy-Control} $\rightarrow$ Robustheit
+\begin{itemize}
+\item versch. Zugehörigkeitsfunktion
+\item ähnliche Messwerte
+\item Inferenz- und Defzuzzifizier-Verfahren
+\end{itemize}
+
+\subsubsection{Beispiel Fuzzy-Control}
+Aufgabe: Bremesen eines Fahrzeuges
+
+%TODO 2016-03-22T13:50
+Speziell $v= 90\, km h^{-1} , x = 100\,m$
+
+\begin{enumerate}
+\item Fuzzufuzierung
+	\begin{enumerate}
+	\item Festlegen der unscharfen Mengen, siehe Bild 1,2,3
+	\item Zugehörigkeitsgrade
+		\begin{itemize}
+		\item $\mu_{NIEDRIG} (90) = 0,75, \mu_{MITTEL} (90) = 0,25$
+		\item $\mu_{NIEDRIG} (100) = \frac{2}{3} ; \mu_{MITTEL} (100) = \frac{1}{3}$
+		\end{itemize}
+	\end{enumerate}
+\item Inferenz
+	\begin{enumerate}
+	\item Verarbeitungsregeln\\
+	\begin{tabular}{c|c|c|c}
+	$y \backslash x$ & klein & mittel & groß \\ \hline
+	sehr niedrig & schwach & &  \\
+	niedrig & & schwach & \\
+	mittel & & mittel & \\
+	hoch & & stark & \\
+	sehr hoch & sehr starck & & schwach\\
+	\end{tabular}\\
+	$\text{und} \triangleq \cap \triangleq \min$\\
+	$\text{oder} \triangleq \cup \triangleq \max$ : ganze Zeile und Spalte
+	\item Zugehörigkeitsgrade der Ergebnismenge (Bremsdruck)\\
+	$\mu_{SCHWACH} (p) = \min (\mu_{NIEDRIG}(v), \mu_{MITTEL} (x) ) = \min (0,75;\frac{1}{3}) = \frac{1}{3}$\\
+	$\mu_{MITTEL} (p) = \min (\mu_{MITTEL}(v),\mu_{MITTEL}(x)) = \min (0,25;\frac{1}{3} ) = 0,25$\\
+	$\mu_{SEHRSTARK} (p) = \max (\mu_{SEHRHOCH} (v), \mu_{KLEIN}(x) ) = \max (0;\frac{2}{3} = \frac{2}{3}$\\
+	(ggf. Mehrdeutigkeiten beseitigen!)
+	\item Inferenzmenge
+		\begin{itemize}
+		\item Max-Min-Methode: siehe Bild 4
+		\item Singletons
+		\end{itemize}
+	\end{enumerate}
+\item Defuzzifizierung
+	\begin{enumerate}
+	\item Max-Mittelwert $\alpha = 2 + (2,5 -2 ) \cdot \frac{2}{3} = 2,33, \beta = 3 \curvearrowright p^* = \frac{\alpha + \beta}{2} = 2,67$
+	\item Schwerpunkt-Methode $p^* = 2,005$
+	\item Singletons $p^* = \frac{1 \cdot \frac{1}{3} + 1,5 \cdot 0,25 + 3 \cdot \frac{2}{3} }{\frac{1}{3} + 0,25 + \frac{2}{3}} = 2,16$
+	\end{enumerate}
+\end{enumerate}
+
+\subsection{Weiterführende Operationen mit unscharfen Mengen}
+\subsubsection{t-Normen und s-Normen}
+$\sqcap$ - Durchschnittsoperator\\
+$\sqcup$ - Vereinigungsoperator\\
+$A \sqcup B = (A^C \sqcap B^C )^C$ (de Morgan)\\
+Schreibweise\\
+$\mu_{A \sqcap B} (x) = t (\mu_A (x); \mu_B (x) )$\\
+$\mu_{A \sqcup B} (x) = s (\mu_A (x); \mu_B (x) )$\\
+künftig: $a= \mu_A (x), b= \mu_B (x)$\\
+Aus Axiomen $\Rightarrow t(0;a) = 0 \; \forall a \in [0;1]$\\
+Insbesondere: $t(0;0) = 0$\\
+
+Nachweis: $1^\circ : t (0;1) = 0$\\
+$4^\circ : 0 \leq t (0;a) \leq t(0;1), \; \forall a \leq 1$ \\
+$= 0$\\
+$\curvearrowright t(0;a) = 0$
+\begin{itemize}
+\item $s(a,b) = \mu_{A \sqcup B} (x) = \mu_{(A^C \sqcap B^C)^C }(x) = 1 - \mu_{(A^C \sqcap B^C)} (x) = 1 - t(1-a,1-b)$n
+\end{itemize}
+
+
+\subsubsection{Interaktive Verknüpfungen}
+\begin{enumerate}
+\item Algebraisches Produkt $A \cdot B; \mu_A(x) =: a$ usw.
+\[ \text{alg}_t (a,b) = a \cdot b \]
+\item Beschränktes Produkt $A \odot B$
+\[ \text{bes}_t (a,b) = \max [ 0;a+b-1] \]
+\item Drastisches Produkt $A \ast B$
+\[ \text{dra}_t (a,b) = \left\{ \begin{array}{cr} \min (a,b) & \text{ für } a=1 \vee b=1 \\ 0 & \text{ sonst} \\ \end{array} \right.\]
+\end{enumerate}
+\paragraph{Anmerkung}
+\begin{enumerate}
+\item $A \cap A = A$ \\*
+$\text{alg}_t (a;a) = a^2 \neq a \; (a \neq 1)$
+\item Interaktive
+\paragraph{Beispiel} Computer-Produktion\\
+$\begin{array}{c|c|c|c|c|c|c}
+x & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+a = \mu_A(x)  & 0 & 0,1 &0,5 & 1 & 0,8 & 0 \\
+b = \mu_B(x) & 1 & 0,9 & 0,8 & 0,4 & 0,1 & 0 \\ \hline
+A \cap B & 0 &0,1 & 0,5 & 0,4 & 0,1 & 0 \\
+A \cdot B & 0 & 0,09 & 0,4 & 0,4 & 0,08 & 0 \\
+A \odot B & 0 & 0 & 0,3 & 0,4 & 0 & 0 \\
+A \ast B & 0 & 0 &0 & 0,4 & 0 &0 \\
+
+\end{array}$
+\end{enumerate}
+
+\paragraph{Satz} $\text{dra}_t (a;b) \leq t(a;b) \leq \min (a;b)$
+\paragraph{Nachweis} $\text{dra}_t (a;b) = \left\{ \begin{array}{cr} \min (a;b) & \text{ für } a = 1 \vee b= 1\\ 0 & \text{sonst} \\ \end{array} \right.$
+\begin{enumerate}
+\item $a < 1 \wedge b < 1: \text{dra}_t (a,b) = 0 \subseteq t(a,b) \; \forall a,b $
+\item o.B.d.A. $a=1 : \text{dra}_t (a,b) = b \underbrace{=}_{1^0} t(b,1) \underbrace{=}_{2^0} t(1,b) \; \forall b $\\
+$\curvearrowright \text{dra}_t (a,b) \subseteq t(a,b) \; \forall a,b \in [0;1]$\\
+RS: $a\leq b \quad t(a,b) \underbrace{\leq}_{4^0} t(a,1) \underbrace{=}_{1^0} a = \min (a,b)$
+\end{enumerate}
+
+\subsubsection{Parametrisierte Verknüpfungen}
+\begin{enumerate}
+\item Hamacher-Operator
+\[ H_p^t (a,b) = \frac{ab}{p + (1-p) (a+b - ab)}, p \in [0;\infty)\]
+\paragraph{Satz 1} $H_p^t$ monoton fallend bzgl. $p$\\
+Speziell: $H_0^t (a,b) = \frac{ab}{a+b -ab}$ algebraischer $t$-Quotient\\
+$H_1^t (a,b) = ab = \text{alg}_t (a,b)$\\
+$\lim\limits_{p \to \infty} H_p^t (a,b)= \text{dra}_t (a,b)$
+
+\item Kompensatorische Operatoren\\
+Lücke zwischen $\cap$ und $\cup$ schließen
+\paragraph{Beispiel} Kunstsammler\\
+$A := \text{GUT ERHALTEN}; B:= \text{WERTVOLL}; x=c: \text{Gemälde von Cranach}$\\
+$\mu_A(c) = 0,2 ; \mu_B(c) = 0,9$\\
+Kaufen? "`und"': $\mu_{A \cap B} (c) = \min (a,b) = 0,2$\\*
+"`oder"' $\mu_{A \cup B} (c) = \max (a,b) = 0,9$
+
+\item min-max-Kompensationsoperator
+\[ K_\gamma = [ \min (a,b) ]^{1-\gamma} [\max(a,b)]^\gamma ; \gamma \in [0;1]\]
+\item konvexer min-max-K.-Operator
+\[ kK_\gamma = (1 - \gamma) \min (a,b) + \gamma \max (a,b)\]
+\end{enumerate}
+
+\paragraph{Vergleich von $K_\gamma$ und $kK_\gamma$}
+Bezeichnen $u = \min (a,b), v= \max (a,b):$\\
+$K_\gamma = u^{1-\gamma} v^\gamma = u (\frac{v}{u} )^\gamma$ Expotentialfkt bzgl. $\gamma$\\
+$kK_\gamma = (1-\gamma) u + \gamma v = u \gamma (v-u)$ lineare Fkt. bzgl. $\gamma$\\
+Es gilt stets: $K_\gamma (a,b) \leq kK_\gamma (a,b) \; \forall a,b \in [0;1]$\\
+Sei $a \leq b$ o.B.d.A.: $ u=a, v=b;$\\
+$\gamma = 0: K_0 = a (\frac{b}{a})^0  = a$, $kK_0 = a$\\
+$\gamma = 1: K_1 = b$, $kK_1 = b$\\
+$K_\gamma$ konvex: $ K_\gamma = K_\gamma (a,b) = a(\frac{b}{a})^\gamma$ \\
+$K_\gamma' = a(\frac{b}{a})^\gamma \ln{(\frac{b}{a})}$\\
+$K_\gamma'' = a(\frac{b}{a})^\gamma [ \ln{\frac{b}{a}}]^2 > 0$\\
+
+Speziell $\gamma = 0,5 : K_{0,5} = u^{\frac{1}{2}} v^{\frac{1}{2}} = \sqrt{uv}$ geom. Mittel\\
+$kK_{0,5} = \frac{u+v}{2}$ arith. Mittel\\
+Folglich $\sqrt{uv} \leq \frac{u+v}{2}$
+
+Abschweifung, Beispiel: Produktion $100$ Einheiten (Anfang)\\
+1. Jahr $+ 100 \% \to 200$ Einheiten\\
+2. Jahr $+ 0 \% \to 200$ Einheiten\\
+Arith. Mittel: $50 \%$ (beide Jahre)\\
+1. Jahr $150$ Einheiten\\
+2. Jahr $225$ Einheiten\\
+Geom. Mittel: Nicht $\sqrt{100 \cdot 0}$ Unsinn!\\
+Vielfache $\sqrt{2 \cdot 1} = \sqrt{2} = 1,41$\\
+$41 \%$ Zuwachs im Durchschnitt\\
+1. Jahr $141$\\
+2. Jahr $141 \cdot \sqrt{2} = 200$
+
+\subsubsection{Das Erweiterungsprinzip}
+Übergang: NIcht-Fuzzy-Größen $\Rightarrow$ Fuzzy-Größen
+
+\subparagraph{Beispiel 1} geg: $y= f(x) = x^2 + 1, \; x \in X = \{ -1;0;1;2\}$\\
+$\curvearrowright y \in Y = \{1;2;5\}$\\
+$A=\{ (-1;0,5);(0;0,08);(1;1);(2;0,4)\}$\\
+ges.: $B=f(A)$\\
+Lösung: $B=\{ (1;0,08);(2;?);(5;0,4)\}$\\
+Erweiterungsprinzip (einfacher Fall)
+$B=f(A) = \{(y,\mu_B(y)) \| y = f(x), x \in X \}$\\
+mit $\mu_B (y) = \left\{ \begin{array}{lcr} \sup y=f(x)\, \mu_A (x) & \text{ falls } & \exists y = f(x)\\ 0 & & sonst\\ \end{array} \right.$\\
+oben: $B = \{ \dots ; (2;1) ; \dots \}$
+
+\paragraph{Allgemein} $A_1; \dots ; A_n $ unscharfe Mengen auf $X_1; \dots ; X_n$
+
+\paragraph{1. Schritt} Kartesisches Produkt $A = A_1 \otimes A_2 \otimes \dots \otimes A_n$ auf $ X_1 \times X_2 \times \dots \times X_n$ mit $\mu_A (x_1;\dots;x_n) = \min \{ \mu_A ; (x_i), \; x_i \in X_i \; i = 1,\dots,n$
+
+\paragraph{Beispiel} $A_1 = \{ (4;0,4);(5;1);(5;0,5);\} \approx 5$\\
+$A_2 = \{ (2;0,1); (3;0,6); (4;1); (5;0,5)\} \approx 4$\\
+
+$\mu_{A_1 \otimes A_2} (x_1,x_2) :$\\
+$\begin{array}{c|cccc}
+x_1 \backslash x_2 & 2 & 3 & 4 & 5\\ \hline
+4  & 0,1 & 0,4 & 0,4 & 0,4 \\
+5 & 0,1 & 0,6 & 1 & 0,5 \\
+6 & 0,1 & 0,5 & 0,5 & 0,5 \\
+
+\end{array}$
+
+\paragraph{2. Schritt} Erweiterungsprinzip Analog
+\subparagraph{Beispiel 2} $y = f(x_1,x_2) = int \left( \frac{x_1+x_2}{2} \right)$\\
+$\begin{array}{c|cccc}
+x_1 \backslash x_2 & 2 & 3 & 4 & 5 \\ \hline
+4 & \frac{0,1}{3} & \frac{0,4}{3} & \frac{0,4}{4} & \frac{0,4}{4} \\
+5 & \frac{ }{3} & \frac{ }{4} & \frac{ }{4} & \frac{ }{5} \\
+6 & \frac{ }{4} & \frac{ }{4} & \frac{ }{5} & \frac{ }{5} \\
+
+\end{array}$\\
+$B= int (\frac{A_1+A_2}{2})$\\
+$\mu_B(3) = \sup f(x_1,x_2) = 3 \{0,1;0,4;0,1\} = 0,4$
+
+\subsection{Unscharfe Maße}
+\subsubsection{Wahrscheinlichkeit und Möglichkeit}
+$ A \subset \Omega$ Grundbereich; "`Ereignis"'
+
+\subparagraph{Definition 1} Mengenfunktion $F(A)$ heißt unscharfes Maß:
+\begin{enumerate}
+\item $F(\varnothing) = 0, \; F(\Omega) = 1$ (Normierung)
+\item $A_1 \subset A_2 \Rightarrow F(A_1) \leq F(A_2)$ (Monotonie)
+\item $A_1 \subset A_2 \subset \dots \subset A_n \subset \dots : \lim\limits_{n \to \infty} F(A_n) = F(\lim\limits_{n \to \infty} A_n)$ (Stetigkeit)
+\end{enumerate}
+\subparagraph{Folgerungen} $\forall A,B \subset \Omega$:
+\begin{enumerate}
+\item $F(A \cup B) \geq  \max [ F(A), F(B)]$
+\item $F(A \cap B) \leq \min [F(A), F(B)]$
+\end{enumerate}
+
+Nachweis: $A \cap B \subset A \subset A \cup B$\\
+Wegen (2): $F(A \cap B) \leq F(A) \leq F(A \cup B)$\\
+Analog $F(A \cap B) \leq F(B) \leq F(A \cup B)$\\
+$\Rightarrow F(A \cap B) \leq \min (F(A), F(B)) \triangleq (2)$\\
+Analog (1)
+
+\paragraph{Definition 2} $P(A)$ Wahrscheinlichkeit, wenn
+\begin{enumerate}
+\item $0 \leq P(A) \leq 1 \; \forall A \subset \Omega$
+\item $P(\Omega) = 1$
+\item $P(A_1 \cup A_2 \cup \dots ) = P(A_1) + P(A_2) + \dots$ für $A_i \cap A_j = \varnothing , \; i \neq j$
+\end{enumerate}
+
+\paragraph{Satz} Wahrscheinlichkeit ist unscharfes Maß
+
+\paragraph{Teil-Nachweis} (Monotonie)\\
+$A_1 \subset A_2 : P(A_2) = P(A_1 \cup (A_2 \cap A_1^C)) = P(A_1) + \underbrace{P(A_2 \cap A_1^C)}_{\geq 0} \curvearrowright P(A_1) \leq P(A_2)$
+
+\paragraph{Grenzen der Wahrscheinlichkeit für Ungewissheit}
+
+\subparagraph{Beispiel} Produktionsanlage
+Brauchbarkeit Grundstück (Flurstück 1 und 2 einzeln zu klein, aber zusammen groß genug)
+$P(1) = 0, P(2) = 0, P(1 \cup 2) = 1 \curvearrowright$ keine Wahrscheinlichkeit
+
+\paragraph{Definition 3} $\Pi (A)$ Möglichkeit
+\begin{enumerate}
+\item $\Pi (\varnothing) = 0; \; \Pi (\Omega) = 1$
+\item $\Pi (A \cup B) = \max [ \Pi (A); \Pi (B) ]$
+\end{enumerate}
+\begin{itemize}
+\item $\Pi (A)$ unscharfes Maß
+\item Für Elementareignisse $\{ x \} (x \in \Omega)$:\\
+Möglichkeitsverteilung $\pi (x) : \Omega \rightarrow [0;1]$\\
+$\Rightarrow \Pi (A) = \max x \in A \;  \pi (x)$
+\item Es gilt $P(A) \leq \Pi (A) \forall A \subset \Omega$
+\end{itemize}
+
+\subparagraph{Beispiel} $A:$ "`N isst $x$ Brötchen zum Frühstück "'
+
+$\begin{array}{c|ccccccc}
+x & 0 & 1 & 2 & 3 & 4 & 5 & \Sigma \\ \hline
+P(\{x\}) & 0,1 & 0,2 & 0,5 & 0,1 & 0,1 & 0 & 1 \\
+\pi (x) = \Pi (\{x\}) & 1 & 1 & 1 & 0,6 & 0,3 & 0,1 & > 1\\
+\end{array}$\\
+Wieviel kaufen: $E(X) = \sum x P(\{x \}) = 0 \cdot 0,1 + 1 \cdot 0,2 + 2 \cdot 0,5 + 3 \cdot 0,1 + 4 \cdot 0,1 = 1,9$
+
+\subparagraph{Aufgabe 1} Wie groß Wahrscheinlichkeit  bzw. Möglichkeit $\geq 3$ Brötchen isst?
+
+Lösung: $\Pi (A) = \max x \in \{3;4;5\} \; \pi (x) = 0,6$\\
+$P(A) = \sum\limits_{x=3} P(x) = 0,2$
+
+\paragraph{Definition 4} Notwendigkeit $N(A) = 1- \Pi (A^C) = \min x \notin A \; \{ 1- \pi (x) \} \; \forall A \subset \Omega$
+Es gilt:
+\begin{itemize}
+\item $N (A \cap A^C) = \min [N(A), N(A^C)]$
+\item $\Pi (A) \geq N(A) \; \forall A$
+\item $N(A) > 0 \rightarrow \Pi (A) = 1 $
+\item $\Pi (A) < 1 \rightarrow N(A) = 0$
+\end{itemize}
+
+\paragraph{Nachweis} $N(A) > 0 \quad 0 \underbrace{=}_{\text{unscharfes Maß}} N(A \cap A^C) = \min [ N(A), N(A^C)] \curvearrowright N(A^C) = 0$\\
+$0 = N(A^C) = 1 - \Pi((A^C)^C) \curvearrowright \Pi (A) = 1$
+
+$N(A) = 1- \Pi (A^C)$\\
+$= \min\limits_{x \notin A} \{1- \pi (x)\} $
+\subparagraph{Beispiel} $A^C$ Stein fällt nach oben: unmöglich\\
+$A^C$ Stein fällt nach unten: notwenig
+
+$\begin{array}{c|c|c|c|c|c|c}
+x & 0 & 1 & 2 & 3 & 4 & 5 \\ \hline
+\pi (x) & 1 & 1 & 1 & 0,6 & 0,3 & 0,1\\
+\end{array}$
+
+\subparagraph{Beispiel} Notwendigkeit, dass N. isst:
+$0$ Brötchen $\triangleq A$\\
+$\leq 2$ Brötchen $\triangleq B$\\
+$>2$ Brötchen $\triangleq C$\\
+$N(A) = \min\limits_{x>0} \{ 1- \pi (x) \} = \min \{ \underbrace{1-1}_{0}, \dots \} = 0$\\
+$N(B) = \min\limits_{x>2} \{ 1- \pi (x) \} = \min \{ 1-0,6;1-0,3; 1-0,1 \} = 0,4$\\
+$N(C) = \min\limits_{x \leq 2} \{ 1- \pi (x) \} = \min \{1-1;\dots \} = 0$
+
+
+\subsubsection{Einige Verallgemeinerungen}%1.4.2
+
+\subparagraph{Beispiel} $\bigtriangleup (A) = \min\limits_{x \in A} \pi (x) = \pi (0) =1$\\
+$\bigtriangledown (A) = 1 - \max\limits_{x \notin A} \pi (x)  = 1- \max\limits_{x > 0} \pi (x) = 1- \max \{1;\dots\} = 0 $\\
+$\bigtriangleup (B) = \min\limits_{x \in B} \pi (x) = 1$\\
+$\bigtriangledown (B) = 1 - \max\limits_{x> 2} \pi (x) = 1 - \max \{ 0,6; \dots \} = 1-0,6 = 0,4$\\
+$\bigtriangleup (C) = \min\limits_{x \in C} \pi (x) = 0,1$\\
+$\bigtriangledown (C) = 1- \max\limits_{x \leq 2} \pi (x) = 1-1 = 0$\\
+
+\subsubsection{Unschärfemaße}
+\paragraph{Lokale Unschärfe} $x \in G \approx$ unscharfe Menge: $\mu_A (x)$
+
+Zu A: Entropiemaße, Scharfe Mengen: $A \cap A^C = \varnothing$\\
+$D = A \cap A^C \triangleq $ Maß für Unschärfe von G\\
+$\mu_D (x) = \min ( \underbrace{\mu_A(x)}_{a}, 1- \underbrace{\mu_A(x)}_{a} )$\\
+Es gilt $\min (a,b) = \frac{1}{2} [a + b - | a-b | ]$\\
+Tatsächlich: O.B.d.A: $a \geq b : LS = \min (a,b) = b$\\
+$RS= \frac{1}{2} [a+b - (a-b) ] = b$\\
+$\curvearrowright \mu_D (x) = \frac{1}{2} [a+(1-a) - | a-(1-a) |] = \frac{1}{2} [1 - | 2a -1|]$\\
+Shannonsche Unschärfemaß
+\[ \underbrace{\mu_A (x)}_{C} \ln \underbrace{\mu_A(x)}_{C}\]
+$\lim\limits_{c \to 0} c \ln c = \lim\limits_{c \to 0} \frac{\ln c}{\frac{1}{c}} \underbrace{=}_{\frac{-\infty}{\infty}} \lim\limits_{c \to 0} \frac{1}{c (- \frac{1}{c^2})} = \lim\limits_{c \to 0} (-c) = 0$\\
+
+\subsection{Fuzzy-Aussagenlogik}%1.5
+\subsubsection{Grundlagen}
+\paragraph{Syntax}
+\begin{enumerate}
+\item Alphabet
+\item Regeln: Zulässige Ausdrücke (ZA)
+\[ \Omega = \{\text{ZA}\}\]
+\end{enumerate}
+
+\subparagraph{Beispiel}
+\begin{enumerate}
+\item $\neq a \wedge \neq (b \rightarrow c)$ ZA
+\item $0 \vee p \leftrightarrow q \rightarrow 1$ ZA
+\item $ x \vee y \wedge z$ kein ZA
+\item $\neq (\alpha \wedge \beta)$ kein ZA
+\item $x \wedge y \Leftrightarrow < y \wedge x$ kein ZA
+\end{enumerate}
+
+\paragraph{Semantik}
+\begin{enumerate}
+\item $\delta$: Wahrheitswert
+\[ \forall A \in \Omega \rightarrow \delta (A) \in [0;1]\]
+\item Operatoren
+\item ZA
+	\begin{itemize}
+	\item Tautologien
+	\item erfüllbar
+	\item unerfüllbar
+	\end{itemize}
+\item Metasprache $\Leftrightarrow, \Rightarrow$ z.b. $a \leftrightarrow b \Leftrightarrow a \rightarrow b \wedge b \rightarrow a$ \\
+speziell $\delta (A) = \{ 0;1\}$: klass. Aussagenlogik\\*
+$\delta (A) = \{ 0;\frac{1}{2}; 1\}$: Lukasiewicz-Logik
+\end{enumerate}
+
+\subparagraph{Beispiel} Informatiker mit Kenntnissen in Rechnernetzen und Betriebswirtschaft haben gute Berufsaussichten in der Entwicklung oder im Mangement.
+
+Informatiker NN\\
+a: NN hat Kenntnisse in Rechernetzen: $\delta (a) = 0,9$
+b: NN hat Kenntnisse in Betriebswirtschaft $\delta (b) = 0,7$
+c: Es bestehen gute Entwicklungsaussichten in Entwicklung: $\delta (c) = 0,8$
+d: Es bestehen gute Beufsaussichten im Mangement $\delta (d) = 0,4$
+
+Gesamtaussage $A(a;b;c;d) : a \wedge b \rightarrow c \vee d$ mit $\delta (\underbrace{a\wedge b}_{} \rightarrow \underbrace{c \vee d}_{})
+= \min [1; 1 + \delta (c \vee d) - \delta (a \wedge b)]
+= \min [1; 1+ \max (\delta (c); \delta (d)) - \min (\delta (a); \delta (b))] =
+= \min [1; 1+ \max (0,8;0,4) - \min (0,7;0,9)]
+= \min [1; 1+ 0,8 - 0,7 ] = 1$ w.A.
+
+\subsubsection{Logische Gesetze}
+Dualität: $\wedge \leftrightarrow \vee$\\*
+$0 \leftrightarrow 1$\\
+z.B. neutrales Element
+$a \vee 0 \Leftrightarrow a$
+
+Nachweis: Mit Fallunterscheidung:
+\subparagraph{Beispiel}
+$\begin{array}{c|c|c|c|c|c}
+\delta () \leq \delta () & \delta (a \wedge b) & \neg(a\wedge b) & \neg a & \neg b & \neg a \vee \neg b\\ \hline
+a \; b & \delta (a) & 1-\delta (a)& 1 - \delta (a) & a - \delta (b) & 1 - \delta (a) \\
+b \; a & \delta (b) & 1 - \delta (b) & 1 - \delta (a) & 1 - \delta (b) & 1 - \delta (b) \\
+\end{array}$
+
+\paragraph{Anmerkung} Doppelte Negation $\neg \neg(a) = a$\\
+Konjunktive (diskunktive) Normalform
+\paragraph{Satz 1}
+
+\subparagraph{Beispiel} $(a \vee b) \wedge \neg (b \wedge (\neq a \vee \neg b))$\\
+$\Leftrightarrow (a \vee b) \wedge ( \neg b \vee \neg  (\neg a \vee \neg b))$\\
+$\Leftrightarrow (a \vee b) \wedge (\neg  b \vee (a \wedge b))$\\
+$\Leftrightarrow (a \vee b) \wedge (\neg b \vee a) \wedge (\neg b \vee b)$
+
+\subparagraph{$\rightarrow$ und $\leftrightarrow$ Operatoren}
+\paragraph{Satz 2}
+\begin{enumerate}
+\item $a \leftrightarrow b \Leftrightarrow (a \rightarrow b) \wedge (b \rightarrow a)$
+\item $a \rightarrow b \Leftrightarrow \neg b \rightarrow \neg a$
+\end{enumerate}
+
+\subparagraph{Nachweis}
+$\begin{array}{c|c|c|c|c}
+\delta () \leq \delta () & a \rightarrow b & \neg b & \neg a & \neg b \rightarrow \neg a \\ \hline
+a \; b & 1 & 1 - \delta (b) & 1 - \delta (a) & 1 \\
+b \; a & 1+ \delta (b) \neg \delta (a) & 1 - \delta (b) &  1- \delta (a) & 1 + \delta (b) - \delta (a)\\
+\end{array}$
+\subparagraph{Beispiel} Wenn man sich mit den log. Grundlagen der Fuzzy-Logik ausgiebig beschäftigt, dann versteht man die Anwendungen der Fuzzy-Logik richtig. Kontraposition: selbständig!
+
+\subparagraph{Spezielle Gesetze der klass. Aussagenlogik}
+Nur klassisch:
+\begin{enumerate}
+\item $a \wedge \neg a \Leftrightarrow 0$\\
+Fuzzy: NEIN z.B. $\delta (a) = 0,3; \delta (\neg a) = 0,7; \delta(a \wedge \neg a) = \min (0,3;0,7) = 0,3 \neq 0$
+\item $a \rightarrow b \Leftrightarrow \neg a \vee b$\\
+$\begin{array}{c|c|c|c|c|c}
+a & b & a \rightarrow b & \neg a & \neg a \vee b & (a \rightarrow b) \Leftrightarrow \neg a \vee b\\ \hline
+0 & 0 & 1 & 1 & 1 & 1 \\
+0 & 1 & 1 & 1 & 1 & 1 \\
+1 & 0 & 0 & 0 & 0 & 1 \\
+1 & 1 & 1 & 0 & 1 & 1 \\
+\end{array}$
+\end{enumerate}
+\subparagraph{Aber} $\delta (a) = \delta (b) = \frac{1}{2}$ \\
+$ \delta (a \rightarrow b) = 1$\\
+$\delta (\neg a \vee b) =  \max (1- \delta (a) ; \delta (b) ) = \frac{1}{2}$
+
+\subparagraph{Tautologie} (klassisch!)
+\subparagraph{Beispiel} $(a \wedge \neg (b \vee c)) \rightarrow (b \leftrightarrow c)$\\*
+$\Leftrightarrow \neg (a \wedge \neg (b \vee c)) \vee ((b \rightarrow c) \wedge (c \rightarrow b))$\\*
+$\Leftrightarrow ( \neg a \vee (b \vee c)) \vee ((\neg b \vee c ) \wedge (\neg c \vee b))$\\*
+$\Leftrightarrow (\neg a \vee b \vee c \vee \neg b \vee c ) \wedge (\neg a \vee b \vee c \vee \neg c  \vee b ) \Leftrightarrow 1$
+
+\subparagraph{Ausblick} (klassisch)
+\begin{enumerate}
+\item $\rightarrow \leftrightarrow \Leftrightarrow \wedge \vee$
+\item $ A \vee B \Leftrightarrow \neg (\neg A \wedge \neg B)$
+\item Definiieren $f(A,B) = \neg (A \wedge B)$
+\end{enumerate}
+Es gilt
+\begin{enumerate}
+\item $A \wedge B \leftrightarrow f(f(A,B),f(A,B))$
+\item $\neg A \leftrightarrow f(A,A)$
+\end{enumerate}
+
+\paragraph{Klassische Schlussfiguren}
+\begin{enumerate}
+\item Modus ponens
+\item Modus tollens
+\item Modus barbara
+\end{enumerate}
+Zu Modus ponens $(a \rightarrow b) \wedge a \rightarrow b \Leftrightarrow \neg (\underbrace{a \rightarrow b}_{\neg a \vee b} ) \wedge a) \vee b$\\
+$\Leftrightarrow \neg (\neg a \vee b) \vee \neg a \vee b \Rightarrow (a \vee \neg a \vee b) \wedge (\neg b \vee \neg a \vee b) \Rightarrow 1$\\
+\subparagraph{Aber} $\delta (a) = 0,8; \delta (b) = 0,3$\\
+$\delta (a \rightarrow b) = \min ( 1 ; 1 + \delta (b) - \delta (a) ) = 0,5$\\
+$\Rightarrow \delta ((a \rightarrow b) \wedge a \rightarrow b ) = \min (1; 1 + 0,3 - \min (0,5;0,8)) = 0,8 \neq 1$
+
+zu tollens und barbara analog (klassische Gesetzmäßigkeiten gelten nicht)
+
+\subsubsection{Approximatives Schließen}
+\paragraph{Erweiterter Modus ponens}
+$A \rightarrow B$\\
+$A'$
+$B'$
+bzw.: $(A \Rightarrow B) \wedge A' \rightarrow B'$
+
+\paragraph{Beispiel} Rote Kirschen sind süss
+\begin{enumerate}
+\item "`KRISCHFARBE  X = ROT"'
+\item "`GESCHMACK Y IST  SÜSS"'
+\item "`KRISCHFARBE X IST SEHR ROT"'
+\end{enumerate}
+$\rightarrow b' :$ GESCHMACK $Y$ IST MEHR ALS SÜSS
+
+$(A \rightarrow B) \wedge A' \rightarrow B'$
+Zu 1) $\mu_{A \rightarrow B} (x,y) = I \dots (\underbrace{\mu_A(x)}_{a};\underbrace{\mu_B(y)}_{b})$ siehe Heft\\
+Zu 2) $\mu_B' (y) = I \dots (\mu_A(x);\mu_B(y)) \ast \mu_A'(x)$ mit $(\ast)$: max-t-Komposition (Erweiterungsprinzip, deshalb max, $\wedge$ deshalb t)
+
+\subparagraph{Beispiel} \textsc{Mamdani}-Implikationsoperator; $t \triangleq \min$\\
+geg: $A=\{ (1;0,3);(2;0,6);(3;1);(4;0)\}$\\*
+$B = \{(1;0,2);(2;1);(3;0,6);(4;0,3)\}$\\*
+Sei $A' = \{(1;1);(2;0,5);(3;0,4);(4;0,1)\}$\\
+ges.: $B'$
+
+zu A) $\begin{array}{c|c|c|c|c}
+x \backslash y & 1 & 2 & 3 & 4\\ \hline
+1 & 0,2 & 0,3 & 0,3 & 0,3\\
+2 & 0,2 & 0,6 & 0,6 & 0,3\\
+3 & 0,2 & 1 & 0,6 & 0,3\\
+4 & 0 & 0 & 0 & 0\\
+\end{array}$
+$\mu_{A \rightarrow B} (x,y) = \min (\mu_A(x);\mu_B(y))$\\
+$\mu_{RI} (x,y)$\\
+Zu 2) $RI \wedge A' =: RT$ mit $\mu_{RT}(x,y) = \min (\mu_{RI} (x,y); \mu_A'(x))$\\
+$\begin{array}{c|c|c|c|c}
+x \backslash y & 1 & 2 & 3 & 4\\ \hline
+1 & 0,2 & 0,3 & 0,3 & 0,3 \\
+2 & 0,2 & 0,5 & 0,5 & 0,3\\
+3 & 0,2 & 0,4 & 0,4 & 0,3\\
+4 & 0 & 0 & 0 & 0\\
+\end{array}$\\
+$\curvearrowright \mu_B' (y) = \max\limits_x \mu_{RT} (x,y) = \{(1;0,2);(2;0,5);(3;0,5);(4;0,3)\}$
+
+\subsubsection{Spezielle Implikationsoperatoren}
+\paragraph{Zadeh-Implikation "`IF-THEN"'}
+\subparagraph{Motivation(klassisch)} $a \rightarrow b \Leftrightarrow \neg a \vee b$\\
+$\Leftrightarrow (\neg a \vee b) \wedge (\neg a \vee a)$\\
+$\Leftrightarrow \neg a \vee (b \wedge a)$\\
+$\curvearrowright \mu_{A \rightarrow B} (x,y) = \max (\min (a,b); 1-a)$\\
+\textsc{If-Then-Else}: "`wenn a, dann b, sonst c"'\\
+$(a \rightarrow b) \wedge (\neg a \rightarrow c)$\\
+$\mu_\ast (x,y) = \max (\min (a;b); \min (1-a;c))$\\
+Insbesondere $c = \neg b$\\
+$(a \rightarrow b) \wedge (\neg a \rightarrow \neg b) \Leftrightarrow (a \rightarrow b) \wedge (b \rightarrow a)$\\
+$\Leftrightarrow a \leftrightarrow b$\\
+$\curvearrowright \mu_{A \leftrightarrow B} (x,y) = \max ( \min (a;b); \min (1-a;1-b))$
+
+\subparagraph{Beispiel} Körpergröße $\leftrightarrow$ Schuhgröße $A:=$ LANG, $B:=$ GROSS\\
+$\begin{array}{c|c|c|c|c|c|c|c}
+\text{Körpergr. } x (cm) & 165 & 170 & 175 & 180 & 185 & 190 & 195\\ \hline
+\mu_A(x) & 0 & 0,1 & 0,3 & 0,7 & 0,8 & 0,9 & 1\\
+1 - \mu_A(x) & 1 & 0,9 & 0,7 & 0,3 & 0,2 & 0,1 & 0\\ \hline
+\text{Schuhgr. } & 40 & 41 & 42 & 43 & 44 & 45 & 46\\ \hline
+\mu_B(y) & 0 & 0,1 & 0,3 & 0,5 & 0,7 & 0,9 & 1 \\
+1 - \mu_B(y) & 1 & 0,9 & 0,7 & 0,5 & 0,3 & 0,1 & 0\\
+
+\end{array}$\\
+
+LANG $\leftrightarrow$ GROSS
+$\begin{array}{c|c|c|c|c|c|c|c}
+x \backslash y & 40 & 41 & 42 & 43 & 44 & 45 & 46\\ \hline
+165 & 1 & 0,9 & 0,7 & 0,5 & 0,3 & 0,1 & 0\\
+170 & 0,9 & 0,9 & 0,7 & 0,5 & 0,3 & 0,1 & 0,1 \\
+175 & \dots & \dots & \dots & \dots & \dots & \dots & \dots \\
+180 & \dots & \dots & \dots & \dots & \dots & \dots & \dots \\
+185 & \dots & \dots & \dots & \dots & \dots & \dots & \dots \\
+190 & 0,1 & 0,1 & 0,3 & 0,5 & 0,7 & 0,9 & 0,9\\
+195 & 0 & 0,1 & 0,3 & 0,5 & 0,7 & 0,9 & 1\\
+
+\end{array}$
+
+\paragraph{\textsc{Gödel} -Implikation} Motivation(klassisch)
+$\begin{array}{c|c|c|c|c}
+a & b & a \rightarrow b & \text{Vergleich} & \text{Ergebnis}\\ \hline
+1 & 1 & 1 & \delta (a) \leq \delta (b) & 1\\
+1 & 0 & 0 & \delta (a) > \delta (b) & \delta (b)\\
+0 & 1 & 1 & \delta (a) \leq \delta (b) & 1 \\
+0 & 0 & 1 & \delta (a) \leq \delta (b) & 1 \\
+\end{array}$
+
+\paragraph{Satz}
+\begin{enumerate}
+\item $B \subset B'$
+\item $A' = A \xrightarrow{\text{Gödel}} B'=B$ (klass. Modus ponens)
+\item Für 3. - \textsc{Gödel}-Implikation größtmögliche Relation
+\end{enumerate}
+
+Zu 1. $\mu_B' (y) = \max ( \min (\mu_A'(x);\mu_{A \xrightarrow{\text{Gödel}} B}(x,y))) \geq
+\min (\underbrace{\mu_A'(x_0)}_{1};\mu_{A \xrightarrow{\text{Gödel}} B} (x,y)) \geq \mu_B(y)$\\*
+$A'$ normalisiert: $\exists x_0 : \mu_A'(x_0) = 1$
+
+Zu 2. Fallunterscheidung\\
+\begin{enumerate}
+\item $\mu_A(x) \leq \mu_B(y):$
+\[ \min (\mu_A' (x); \underbrace{\mu_{A \xrightarrow{\text{Gödel}} B} (x,y)}_{1} ) =  \mu_A' = \mu_A(x)\]
+\item $\mu_A(x) > \mu_B(y) \quad \leq \mu_B(y)$ (laut Norm)
+\[ \min ( \underbrace{\mu_A'(x)}_{\mu_A(x)};\underbrace{\mu_{A \xrightarrow{\text{Gödel}} B} (x,y)}_{\mu_B(y)} ) \leq \mu_B (y) \]
+$\Rightarrow \mu_B' (y) = \max \min (\mu_A' (x) ; \mu_{A \xrightarrow{\text{Gödel}} B} (x,y))$
+d.h. $B' \subset B + 1. \Rightarrow 2.$
+\item RI-Implikations-Relation\\
+Geg.: $\mu_B' (y) = \max\limits_x \min (\mu_A(x); \mu_{RI} (x,y)) \leq \mu_B(y)$
+
+Maximaler Wert von $\mu_{RI} (x,y):$
+\begin{enumerate}
+\item $\mu_A(x) \leq \mu_B(y) \Rightarrow \max (\mu_{RI} (x,y) ) = 1$
+\item $ \mu_A(x) > \mu_B(y) \Rightarrow \max (\mu_{RI} (x,y) ) = \mu_B(y)$\\
+$\curvearrowright$ Maximallösung RI $\triangleq$ Gödel
+\end{enumerate}
+
+
+\end{enumerate}
+
+
+
+% CURSOR TODO %
+
+\section{Stochastische Modelle}
+\subsection{Zuverlässigkeitstheorie}
+\subsubsection{Systemzuverlässigkeit}%2.1.1%
+Elemente $E_1, \dots, E_k:$ Ausfallwahrscheinlichkeit, $p_1,\dots,p_k$
+\begin{enumerate}
+\item Serienschaltung
+
+
+ %Ebenfalls bruch eventl. TODO %
+
+ $p_s$ - Systemzuverlässigkeit
+ Ereignisse: $S$ Systemintakt
+ $A_i$ Element $E_i$ intakt
+
+$p(A_i) = 1 - P(\bar{A_i}) = 1- p_i$
+$p_s = P(S) = P(A_1 \cap A_2 \cap \dots \cap A_k ) = P(A_1) \cdot \dots \cdot P(A_k) = (1- p_1) \cdot \dots \cdot (1- p_k) (1)$
+
+\item Parallelschaltung
+\subparagraph{Beispiel}
+	\begin{itemize}
+	\item Zweimotorige Flugzeuge: Motoren
+	\item Siebenköpfiger Drache: Köpfe
+\end{itemize}
+
+$p_p = P(S) = 1- P(\bar{S}) = 1 - P(\bar{A_1} \cap \bar{A_2} \cap \dots \cap \bar{A_k} ) = 1- P(\bar{A_1}) \cdot \dots \cdot P(\bar{A_k}) = 1 - p_1 \cdot p_2 \cdot \dots \cdot p_k (2)$
+
+\item Zusammengesetzte Systeme [hier $E$ 1,2,3 parallel ($S_1$), dazu 4 und 5 seriell dazu ($S_2$)]
+
+Systemzuverlässigkeit $p_{sy} = (1- p_1p_2p_3) \cdot (1- p_4) \cdot (1-p_5)$
+\subparagraph{Beispiel}
+	\begin{enumerate}
+	\item  $p_1 = p_2 = p_3 = 0,1$\\
+	$p_4 = p_5 = 0,001$
+	$\curvearrowright p_{sy} = 0,9970$\\
+	Zum Vergleich : $S_1 \triangleq E_1 : p_{sy} = 0,9 \cdot (0,999)^2 = 0,8932$
+	\end{enumerate}
+
+	\subparagraph{Interpretation der Ergebnisse} Zeit: pro Stunde; $p = p_{sy}$
+	ges: (Durchschnittliche) Funktionsdauer $T_S: E(T_S) = \sum\limits_{n=1}^\infty np^n = \sum\limits_{n=1}^\infty n p^{n-1} p = p \sum\limits_{n=1}^\infty (p^n)' = p (\sum\limits_{n=1}^\infty p^n)' = p (\frac{p}{1-p})' = p \frac{(1-p) + p}{(1-p)^2} = \frac{p}{(1-p)^2} $
+
+	\subparagraph{Beispiel}
+	\begin{enumerate}
+	\item $E(T_S) = 110.777,78 h \triangleq 4615 d \triangleq 12,6 a$
+	\item $E(T_S) = 78,3 h \triangleq \approx 3d$
+	\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Erneuerungsprozess} %2.1.2.%
+$T_1 = t_1 - 0, T_2 = t_2 - t_1$ Betriebszeiten
+
+Verteilungsfunktionen für $T_i: F(t) = P(T_i \leq t) (t \geq 0 )$\\*
+$(0;t]:$ Anzahl von Erneuerungen $N_t$\\
+Offenbar $P(N_t < n) = P(t_n > t), n=0,1,2,\, t > 0$
+\subparagraph{Spezialfälle}
+\begin{enumerate}
+\item $T_i \sim N (\mu; \sigma^2); \mu > 3 \sigma$\\
+$P(N_t = 0) = P(N_t < 1) = P(t_1 > t) = P(T_1 > t) = 1 - P(T_1 \leq t) = 1 - \Phi ( \frac{t-\mu}{\sigma} )$\\
+$P (N_t < 2) = P(t_2 > t) = P(T_1 + T_2 > t) = 1- P(T_1 + T_2 \leq t ) = 1- \Phi (\frac{t - 2 \mu}{\sqrt{2} \sigma}$\\
+Analog: $P(N_t < n ) = 1 - \Phi ( \frac{t-n \mu}{\sqrt{n} \sigma}), n = 1,2,\dots$
+
+\subparagraph{Beispiel} $\mu = 10, \sigma = 3, t = 35$\\
+$P(N_t < 1) = 1 - \Phi (\frac{35-10}{3}) = 0,000$\\
+$P(N_t < 2) = 0,000$\\
+$P(N_t < 3) = 1 - \Phi (\frac{35-30}{\sqrt{3} 3}) = 0,168$\\
+$P(N_t < 4) = 0,798$\\
+$P(N_t < 5) = 0,987$\\
+$P(N_t < 6) = 1,000$\\
+$\curvearrowright P(N_t = 0) = 0,000; P(N_t = 1) = 0,000; P(N_t = 2) = 0,168$\\
+$P(N_t = 3 ) = 0,630; P(N_t = 4) = 0,189; P(N_t = 5) = 0,013$\\
+Mittlere Anzahl von Erneuerungen:
+$ E(N_t) = \sum\limits_{k=0}^5 k P(N_t = k) = 3,047$
+\end{enumerate}
+
+\paragraph{Expotentialverteilung}
+
+\[F(t) = 1- e^{-\lambda t}, \quad t \geq 0\]
+$\Rightarrow N_t$ Poisson-Verteilt mit Parameter $\lambda t$:
+\[ E(N_t) = \lambda t\]
+Erneuerungsfunktion $H(t) = E(N_t):$\\
+Allgemein: $\lambda t - 1 \leq H(t) \leq \lambda t + \lambda^2 \sigma^2$ mit $E(T_i) = \frac{1}{\lambda} , \sigma^2 = \text{Var}(T_i)$
+Insbesondere \textsc{IFR}-Verteilungen (s. unten)
+\[ H(t) \leq \lambda t \]
+Beispiel: $\mu = E(T_i) = 10, \sigma^2  = \text{Var}(T_i) = 9, t = 35$\\
+ges: $H(t)$ für
+\begin{enumerate}
+\item Exp-Verteilung
+\item allg.
+\item IFR-Verteilung
+\end{enumerate}
+Zu 1): $H(t) = \lambda t = 3,5 \curvearrowright \lambda = \frac{1}{E(T_i)} = \frac{1}{\mu} = \frac{1}{10}$\\
+Zu 2): $2,5 \leq H(t) \leq 2,59$\\
+Zu 3):  $H(t) \leq 3,5$
+
+\subsubsection{Die Ausfallrate}
+\begin{itemize}
+\item $X$-"`Lebensdauer"' eines Bauteils mit Verteilungsfunktion
+\[ P(X \leq t) = F(t) \]
+Ausfallwahrscheinlichkeit.
+
+Dichtefunktion $f(t) = F'(t)$ offenbar $F(0) = 0$ bzw. $F(t) = 0 , \forall t \leq 0$\\
+Mittlere Lebensdauer $T_0 = E(X) = \int\limits_0^\infty t f(t) \; dt$
+
+\item Bedingte Wahrscheinlichkeit, dass Bauteil im Intervall $(t; t + \Delta t]$ ausfällt, wenn es bis $t$ funktioniert hat?\\
+$P(\underbrace{X \leq t + \Delta t}_{B} | \underbrace{X > t}_{A} ) = \frac{\overbrace{P(X \leq t + \Delta t}^{B} \cap \overbrace{X > t)}^{A}}{\underbrace{P(X>t)}_{A}} = \frac{ P(t < X \leq t + \Delta t)}{1 - P(X \leq t)} = \frac{F(t + \Delta t) - F(t)}{1-F(t)}$\\
+$r(t) := \lim\limits_{\Delta t \to 0} \frac{P(X \leq t + \Delta t | X > t)}{\Delta t} = \lim\limits_{\Delta t \to 0} \frac{F(t+ \Delta t) - F(t)}{\Delta t} \frac{1}{1-F(t)} \curvearrowright r(t) = \frac{f(t)}{r-F(t)}$ D.h. $F(t) \rightarrow r(t)$\\
+Umgekehrt $r(t) \rightarrow F(t):$\\
+$\left. \begin{array}{ccc} \bar{F}(t) & = & 1 - F(t) \\ \bar{F'} (t) & = & - F'(t) = -f(t) \\ \end{array} \right\} \Rightarrow r(t) = \frac{-\bar{F'} (t)}{\bar{F}(t)} | \cdot F$\\
+$\bar{F'} (t) + r(t) \bar{F}(t) = 0$\\
+lineare homogene DGL. 1. Ordnung
+\[ \bar{F}(t) = C e^{- \int\limits_0^t r(t) \; dt}\]
+$\bar{F} (0) = 1 - F(0) = 1 \curvearrowright \bar{F} (0) = C = 1 \Rightarrow \bar{F}(t) = e^{-\int\limits_0^t r(t) \; dt} \curvearrowright F(t)$
+
+\end{itemize}
+
+\subparagraph{Typische Modelle}
+\begin{enumerate}
+\item $r(t) = \alpha \beta t^{\beta -1} \; (t\geq 0), \alpha,\beta \geq 0$ \textsc{Weiball}-Verteilung\\
+offenbar für $\beta > 1: r(t)$ streng monoton wachsend\\
+$\beta = 1: r(t)=\alpha = const$\\
+$\beta < 1: r(t)$ streng monoton fallend
+
+Verteilungsfunktion $F(t) = 1- \bar{F}(t) = 1- e^{-\int\limits_0^t r(t) \; dt} = 1 - e^{-\int\limits_0^t \alpha \beta t^{\beta -1} \; dt} = 1- e^{\frac{-\alpha \beta t^\beta}{\beta}|_0^t} = 1 - e^{-\alpha t^\beta}$
+
+$\beta = 1$ Exponentialverteilung (ohne Gedächtnis) ($r(t) = \alpha$)\\
+$\beta = 2 \quad r(t) = 2 \alpha t$ \textsc{Rayleigh}-Verteilung
+\item \textsc{Hjarth}-Verteilung
+\[ r(t) = \alpha t + \frac{\gamma}{1 + \beta t}\quad \alpha,\beta,\gamma \geq 0\]
+\end{enumerate}
+\subparagraph{Spezialfälle}
+\begin{enumerate}
+\item $\alpha = \beta = 0 \; r(t) = \gamma$ Exponential-Verteilung
+\item $\gamma = 0, r(t) = \alpha t$ \textsc{Rayleigh}-Verteilung
+\end{enumerate}
+
+\subparagraph{3 Phasen} Badewannenkurve
+\begin{enumerate}
+\item Frühfehler: $r(t)$ hoch, nimmt ab
+\item Zufallsfehler $r(t) \approx$ const
+\item Altererscheinung $r(t)$ wächst
+
+\end{enumerate}
+
+\subsection{Warteschlagentheorie}
+\subsubsection{Grundbegriffe}
+Mittlere Pausenzeit $m_A$ bzw. $\lambda = \frac{1}{m_A}$-Intensität des Forderungsstroms\\
+Mittlere Bedienungszeit $m_B$ bzw. $\mu = \frac{1}{m_B}$-Bedieungsintensität
+\subsubsection{Das Warteschlangensystem $M|M|1$}
+$1 \triangleq$ 1 Bediener\\
+unbegrenzte Bedienzeiten: $M$ ("`\textsc{Markowsch}"'); Unabhängigkeit!\\
+Pausenzeiten - Exponentialverteilt mit Parameter $\lambda$\\
+Bedienzeiten - Exponentialverteilt mit Paramter $\mu$\\
+Sei $N_t (t \geq 0)$- Anzahl der Forderungen im System zu Zeitpunkt $t$\\
+$P(N_t = i) =: P_i(t), i=0,1,2,\dots$\\
+Es gilt $P_0 (t + \Delta t) = (1- \lambda \Delta t) P_0(t) + \mu \Delta t P_1(t) + o(\Delta t)$ mit $\lim\limits_{\Delta t \to 0} \frac{o(\Delta t)}{\Delta t} = 0$
+
+\subparagraph{Nachweis} Formel der totalen Wahrscheinlichkeit
+\[ P(A) = \sum\limits_i P(A | B_i ) P(B_i)\]
+mit $A$-System zum Zeitpunkt $t+ \Delta t$ leer $\triangleq P_0(t+ \Delta t)$\\
+$B_0$-System zum Zeitpunkt $t$ leer $\triangleq P_0(t)$\\
+$B_1$-System zum Zeitpunkt $t=1$ leer $\triangleq P_1(t)$\\
+Es gilt : $P(A | B_0) = P(\text{"`zu } (t; t+ \Delta t] \text{ keine Forderung"'}) = P(\text{Restpausenzeit } > \Delta t) = 1-P(\text{Restpausenzeit } \leq \Delta t)$\\
+$= 1-(1-e^{-\lambda \Delta t} ) = e^{-\lambda \Delta t} =$ (Taylor-Reihe)\\
+$= 1- \lambda \Delta t + o(\Delta t)$\\
+Analog $P(A | B_1) = \mu \Delta t + o(\Delta t)$\\
+D.h. $*) \Rightarrow P_0(t + \Delta t) = [ 1-\lambda \Delta t + o(\Delta t)] P_0(t) + [\mu \Delta t + o(\Delta t)] P_1(t) = (1-\lambda \Delta t) P_0(t) +  \mu \Delta t P_1(t) + o(\Delta t)$
+
+%TODO Tabellenkopf und 1. Hälfte 2016-04-29T09:30
+
+$\begin{array}{c|c|c}
+1 \rightarrow 1 & \text{Pausen und Bedienzeit laufen nicht ab} & [ 1 - \lambda \Delta t - o(\Delta t) ] \cdot [ 1- \mu \Delta t - o (\Delta t) ] = 1 - \lambda \Delta t - \mu \Delta t + o (\Delta t)\\
+\end{array}$\\
+$1 \leftrightarrow i \curvearrowright P_i (t + \Delta t) = \lambda \Delta t P_{i-1} (t ) + (1- \lambda \Delta t - \mu \Delta t) P_i (t) + \mu \Delta t P_{i+1} (t) + o(\Delta t), \quad i = 1,2,\dots$
+
+Differenzengleichungen mit $P_o (t+ \Delta t) -  P_o(t) = - \lambda \Delta t P_o (t) + \mu \Delta t P_1 (t) + o (\Delta t) | : \Delta t \to 0$\\
+$P_o' (t) = - \lambda P_o(t) + \mu P_1 (t) \quad (1)$
+
+$P_i'(t) = \lambda P_{i-1} (t) - (\lambda + \mu ) P_i (t) + \mu P_{i+1} (t) \quad (2)$\\
+unendliches Dgl-System. Lösung Schwierig! Speziallfall: Stationärer Fall: $P_i (t) =  P_i \quad \forall t$\\
+$\curvearrowright P_i' (t) = 0, i = 0,1,2,\dots$\\
+Gleichungssystem: $0 = - \lambda P_0 + \mu P_1 \quad (1')$\\
+$i=1 \quad  0 = \lambda P_0 - (\lambda + \mu ) P_1 + \mu P_2 \quad (2a')$\\
+$ 0 = \lambda P_{i-1} - (\lambda + \mu) P_i + \mu P_{i+1} \quad (2b') \; i=2,3,\dots$\\
+$(1') \Rightarrow P_1 = \frac{\lambda}{\mu} P_0$\\
+In $(2a'): \; 0 =  \mu P_1 - (\lambda + \mu ) P_1 + \mu P_2$\\
+$\lambda P_0 = \mu P_1 \curvearrowright P_2 = \frac{\lambda}{\mu} P_1$\\
+$\lambda P_1 = \mu P_2$ in $(2b') : \quad 0 = \mu P_2 - (\lambda + \mu ) P_2 + \mu P_3 \curvearrowright P_3 \frac{\lambda}{\mu} P_2$
+\[ \Rightarrow P_i = \frac{\lambda}{\mu} P_{i-1} \quad i = 1,2,\dots\]
+Setzen $\varrho = \frac{\lambda}{\mu} : P_i = \varrho P_{i-1}, i = 1,2,\dots \Rightarrow P_i = \varrho^i P_0, i = 1,2,\dots \quad (3)$\\
+wegen $ \sum\limits_{i=0}^\infty P_i = 1 : \sum\limits_{i=0}^\infty P_i = \sum\limits_{i=0}^\infty \varrho^i P_0 = P_0 \frac{1}{1-\varrho}, | \varrho | < 1 = 1$\\
+$\curvearrowright P_0 = 1 - \varrho, \varrho < 1 \quad (4)$
+
+Anmerkungen: Für $\varrho = \frac{\lambda}{\mu} \geq 1$ ergibt keine vernünftige Lösung, d.h. $\lambda \geq \mu$ (Intensität des Forderungsstrom größer gleich der Bedienintensität)
+
+Mittlere Anzahl warteneder Forderungen\\
+$m_L = \sum\limits_{i=1}^\infty (i-1) P_i = \sum\limits_{i=1}^\infty (i-1) \varrho^i \cdot (1- \varrho) = 1- \varrho \frac{\varrho^2}{(1- \varrho)^2} = \frac{\varrho^2}{1-\varrho}$\\
+Mittlere Wartezeit $m_w$ einer Forderung::\\
+$m_L = \lambda m_w$ (Formel von \textsc{Little})
+$m_w = \frac{\varrho^2}{1-\varrho)\lambda} = \frac{\varrho^2}{(1-\varrho)\varrho \mu}= \frac{\varrho}{(1-\varrho)\mu} \quad (6)$
+
+\subsubsection{Weitere Modelle}
+\subsection{Empirische Statistikmodelle}
+\subsubsection{Statistische Schätzung von Verteilungsfunktion u. Dichtefunktion}
+\begin{enumerate}
+\item Verteilungsfunktion $F(t) = P(X \leq t) $
+\item Dichtefunktion
+\end{enumerate}
+\subsubsection{Simulation von Zufallsvorgängen}
+$F(x)$ bekannt\\
+Simulation
+\begin{enumerate}
+\item Erzeugung (uniformer) Zufallszahlen $u \in [0;1]$
+\item Ermittlung des zu $u$ gehörigen Wertes $F(x)$
+\end{enumerate}
+Zu 1) Peseudo-Zufallszahlen zu 2)
+\begin{enumerate}
+\item Diskrete Zufallsgrößen
+
+Beispiel: $u=,6$ Würfeln $X$-Augenzahl\\
+$p_i = P(X = x_i) = P(X_i) = \frac{1}{6}; i = 1,2,\dots ,6$\\
+$p_1+p_2+p_3 = \frac{3}{6} < u < p_1 + p_2 + p_4 + p_4 = \frac{4}{6}$\\
+$\curvearrowright X = 4$
+
+\item Stetige Zufallsgröße
+\[ F(x) = u \Rightarrow x = F^{-1} (u) \text{ (Inversionsmethode)} \]
+
+Beispiel: Exponentialverteilung:\\
+$F(x) = 1- e^{-\lambda x}, x \geq 0$\\
+$1-e^{-\lambda x} = u$\\
+$1-u = e^{-\lambda x} | ln$\\
+$-\lambda x  = \ln{(1-u)} \curvearrowright x = -\frac{1}{\lambda} \ln{\underbrace{(1-u)}_{\in (0;1]}}$\\
+$\Rightarrow x = -\frac{1}{\lambda} \ln{u}$
+
+Normalverteilung 12er-Regel
+$ Z = \sum\limits_{i=1}^{12} u_i -6 \triangleq N(0,1)$-verteilte Zufallsgröße
+$x$ beliebig normalverteilt, d.h. $N(\mu,\varrho^2):$
+$x = z \varrho + \mu \sim \frac{x-\mu}{\varrho} : N(0,1)$-verteilt
+
+\end{enumerate}
+
+\subsubsection{Die Monte-Carlo-Methode}
+Beispiel: Störungsfreie Funktion einer Anlage Strom und Blattplan
+
+Expnentialverteilung
+\[H_0 : \lambda = \frac{1}{7} \quad H_1 : \lambda \neq \frac{1}{7}, \quad \alpha = 0,05\]
+
+Monte-Carlo-Test
+\begin{enumerate}
+\item Weitere 999 Werte für $\bar{x}$ (aus Stichprobe mit 32 Werten):\\
+$\bar{x} = \frac{1}{n} \sum\limits_{i=1}^{32} x_i = - \frac{1}{n} \sum\limits_{i=1}^{32} \frac{\ln{u_i}}{\lambda} = - \frac{1}{n\lambda} \sum\limits_{i=1}^{32} \ln{u_i} = -\frac{1}{32\lambda} \ln \prod\limits_{i=1}^{32} u_i$
+\item ordnen nach Größen $\bar{x_1} \leq \bar{x_2} \leq \dots \leq \overline{x_{999}} \leq \overline{x_{100}}$
+\item Falls $\bar{x_0} \leq \overline{x_{25}}$ oder $ \bar{x} \geq x_{976}$, dann Ablehnung von $H_0$ Speziell: 480 Werte. $\bar{x_0} \geq  \overline{x_{25}} = N_>, \bar{x_0} \leq \overline{x_{455}} = N_< \curvearrowright H_0$ bleibt
+\end{enumerate}
+
+\subsubsection{Konfidenzintervalle bei nichtnormalverteilter Grundgesamtheit}
+\begin{enumerate}
+\item Zentraler Grenzwertsatz:
+\[ \frac{\overline{X} -E(X)}{S} \sqrt{n} \rightarrow N(0,1) \text{ für } n \to \infty\]
+
+Für große $n$:
+$P(-z_{\frac{\alpha}{2}} \leq \frac{\overline{X} - E(X)}{S} \sqrt{n} \leq z_{\frac{\alpha}{2}}) = 1-\alpha - z_{\frac{\alpha}{2}} \leq \frac{\overline{X}-E(X)}{S} \sqrt{n} \leq z_{\frac{\alpha}{2}} | \cdot \frac{S}{\sqrt{n}} | - \overline{X}$\\*
+$\underbrace{-z_{\frac{\alpha}{2}}}_d \frac{S}{\sqrt{n}} - \overline{X} \leq - E(X) \leq z_{\frac{\alpha}{2}} \frac{S}{\sqrt{n}} - \overline{X} | \cdot (-1)$\\
+$\overline{X} - d \geq E(X) \geq \overline{X} -d$\\
+$\Rightarrow \overline{X} - d \leq E(X) \leq \overline{X} +d$\\
+$\Rightarrow d = z_{\frac{\alpha}{2}} \frac{S}{\sqrt{n}}$\\
+
+
+\subparagraph{Beispiel} (siehe oben) $\bar{x} = 5,04; s= 4,67, n=32, \alpha = 0,05 \quad z_{\frac{\alpha}{2}} = 1,96: \mu = E(X) \in (3,42;6,66) \notni 7$
+
+Anmerkung: $n$ identisch exponentialverteile Größen deren Summe: Gamma-Verteilung mit $\alpha = n$: Konfidenzintervall $[ \frac{2n\overline{X}}{\chi_{2n;\frac{\alpha}{2}}^2};\frac{2n\overline{X}}{\chi_{2n;1-\frac{\alpha}{2}}^2}]$
+$\chi^2_{64;\frac{\alpha}{2}} = 88; \chi^2_{64;1- \frac{\alpha}{2}} = 43,8 \Rightarrow$
+
+\item MonteCarlo-Methode
+
+\begin{itemize}
+\item Verteilung bekannt: analog $\mu \in [\overline{X}_{25}; \overline{X}_{976} ] , \alpha = 0,05$
+\item Boostrap-Konfidenzinterval\\
+z.B. $\alpha = 0,05, u_b = 1000; n=32$\\
+$\mu \in (3,57;6,78) \notni 7$\\
+Normalverteilung $<$ Boostrap $<$ Exponentialverteilung
+\end{itemize}
+\end{enumerate}
+
+\subsubsection{Parameterfreie Test}
+unabhängig von einer Verteilung, "`Schnelltests"'
+Stichprobe 1: Zufallsgröße $X$\\
+Stichprobe 2: Zufallsgröße $Y$
+\[ p_1 = P(X > Y), p_2 = P(X < Y)\]
+\begin{enumerate}
+\item Vorzeichentest\\
+$H_0 : p_1 =p_2 (= \frac{1}{2}) H_1 : p_1 \neq p_2$\\
+$T: x_i > y_i$ - Anzahl der Paare\\
+$T \in K$ - Krit. Bereich $\begin{array}{lc} \text{ja} & H_0 \text{ ablehnen } \rightarrow H_1 \text{ gilt}\\ \text{nein} & H_0 \text{ bleibt} \\ \end{array}$
+
+Beispiel: Schwierige Messungen mit Apparaten 1 und 2, gelungen $\triangleq 1$; misslungen $\triangleq 0$
+
+
+$H_0: p_1 \leq p_2 \; H_1 : p_1 > p_2$ (Fall c);$\alpha = 0,05$\\
+$T=4;m=n=7$\\
+Krit. Bereich $K$:
+\begin{enumerate}
+\item $k=2$ (Gleichheit)
+\item $c' \in \{ 0;1;2;3;4;5\}$
+\end{enumerate}
+$c' : F(c') \leq \alpha , F(c'+1) > \alpha :$ Tab. 1\\
+$n=7 : F(0) 0,008; F(1) = 0,063 > \alpha \curvearrowright c'=0$\\
+Ablehnung von $H_0: T \in \{ m - k -c'; m-k \} = \{5\}$ f.A. $\rightarrow$ keine Ablehnung von $H_0$
+
+\item $U$-Test (nach \textsc{Wilconxon}, \textsc{Mann}, \textsc{Whitney}) Rangsummen
+
+\subparagraph{Beispiel} $m= 6$ Beobachtungen vom Typ $A (\triangleq X)$\\
+$n=5$ Beobachtungen von Typ $B (\triangleq Y)$\\
+Werte\\
+$\begin{array}{c|c|c|c|c|c|c|c|c|c|c|c}
+\text{Werte} & 63 & 68 & 70 & 71 & 91 & 92 & 95 & 96 & 97 & 99 & 104\\
+\text{Herkunft} & A & A & A & A & B & B & B & B & A & B & A\\
+\text{Ränge} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11\\
+\end{array}$\\
+Rangsume $A:R_1 = 30 , B: R_2 = 36$
+\end{enumerate}
+
+Testgröße $u_1 = mn + \frac{m(m+1)}{2} - R_1 = z_1$\\
+$u_2 = mn + \frac{n(n+1)}{2} - R_2 = \frac{9}{30 = mn}$\\
+$U = \min (U_1;U_2) = 9$
+
+Krit. Bereich (Variante $A: m < 8$ oder $ n <8$):
+
+Fall a) $H_0 : p_1 = p_2 \quad H_1 : p_1 \neq p_2$\\
+$U \leq U (m;n;\alpha;\text{zweiseitig}) = 3$ f.A. $\curvearrowright$ keine Ablehnung
+
+\subsection{Statistik für mehrere Zufallsgrößen}%2.4.
+\subsubsection{Partielle Korrelationskoeffizienten}%2.4.2
+$>2$ Zufallsgrößen $x,y,z,\dots$\\
+$| r \times y | \approx 1 \rightarrow x,y $ abhängig usw.\\
+\subparagraph{Beispiel} $Y:$ Geburtenanzahl in D (seit 1950)\\
+$X:$ Störche in D, Scheinkorrelation\\
+3. Größe: $Z$: "`Zivilisation"' (Anzahl der Autos o.ä.), $Z\uparrow \rightarrow X\downarrow , Y\downarrow$
+
+Part. Korrelationskoeff. $r_{1,2;p}$ usw.
+\subparagraph{Beispiel} Körpermaße von Studenten\\
+$| r_{i,j;p} | \geq 0,8 \sim$ Abhängigkeit
+
+\subsubsection{Clusteranalyse}
+Schema: Objekte $\overrightarrow{\text{Messung}}$ Mesdaten $\vec{X}$ $\overrightarrow{\text{Zusammenfsg., Messdatenextraktion}}$ Merkmale $\vec{m}$ $\rightarrow$ Cluster
+
+\subparagraph{Beispiel}
+$X_1$ Alter (Jahre)\\
+$X_2$ Betriebszugehörigkeit(Jahre)\\
+$X_3$ Arbeitsdauer im Ausland (Monate)\\
+$X_4$ Patente\\
+$\begin{array}{c|cccc}
+\text{Personen} \backslash \text{Merkmal} & x_1 & x_2& x_3 & x_4\\ \hline
+A & 25 & 1 & 6 &1 \\
+B & 30 & 6 & 3 &2\\
+C & 35 & 2 & 48 & 5\\
+D & 45 & 15 & 13 & 0\\
+E & 55 & 11 & 0 & 2\\
+\end{array}$\\
+ges: "`Cluster"'
+
+Lösung: \begin{enumerate}
+\item Z-Transformation
+\[ z_{ij} = \frac{X_{ij} - \bar{X}_{oj}}{s_j}\]
+$j$-Merkmals-Nr., $i$-Objekt-Nr.\\
+$\bar{X}_{o1} = \bar{X}_1 = 38, \bar{X}_{o2} = \bar{X}-{2_n} = 7, \bar{X}_{03} = \bar{X}_3 = 14$\\
+$\bar{X}_{o4} = \bar{X}_4 = 2; s^2 = \frac{1}{n-1} \sum\limits_{i=1}^n (x_i - \bar{x}_j)^2$\\
+$s_1^2= 145 \rightarrow s_1 = 12,04; s_2 = 5,90; s_3= 19,61; s_4 = 1,87$\\
+$z_{11} = \frac{x_{11} -\bar{x}_{o1}}{s_1} = \frac{25-38}{12,04} = -1,08$\\
+$\begin{array}{c|cccc}
+\text{Pers.} \backslash \text{Merk.} & X_1 & X_2 & X_3 & X_4 \\ \hline
+A & -1,08 & - 1,01  & -0,41 & -0,53 \\
+B & -0,66 & -0,17 & -0,56 & 0 \\
+C & -0,25 & -0,84 & 1,73 & 1,60 \\
+D & 0,58 & 1,34 & -0,05 & -1,07\\
+E & 1,41 & 0,67 & -0,71 & 0 \\
+\end{array} \triangleq M(z_{ij})$\\
+\item Abstände zw. Objekten $O_i,O_k$
+\[ d_{ik} = \sqrt{(z_{i1} - z_{k1})^2 + \dots + (z_{im} - z_{km})^2}\] $m$ \dots Spaltenanzahl\\
+z.B. $d_{12} = \sqrt{(-1,08 + 0,66)^2 + (-1,01 + 0,17)^2 + \dots + (-0,53 + 0)^2}$ \\
+$(d_{ik}) = \left( \begin{array}{ccccc}
+0 & 1,09 & 3,14 & 2,95 & 3,06\\
+1,09 & 0 & 2,90 & 2,29 & 2,24\\
+3,14 & 2,90 & 0 & 3,97 & 3,68\\
+2,95 & 2,29 & 3,97 & 0 & 1,65\\
+3,06 & 2,24 & 3,68 & 1,65 & 0\\
+\end{array}\right)$\\
+\item Cluster-Bildung (Average-Linkage-Verfahren)
+	\begin{enumerate}
+	\item  $1)2) \rightarrow 1;09$\\
+	$(1) d_{ik} = \left( \begin{array}{cccc}
+	0 & 3,62 & 2,62 & 2,65\\
+	3,62 & 0 & 3,97 & 3,68\\
+	2,62 & 3,97 & 0 & 1,65\\
+	2,65 & 3,68 & 1,65 & 0\\
+	\end{array} \right) \begin{array}{c}
+	\text{"`neu 1"'} (\text{alt } 1 + 2)\\
+	\text{alt 3}\\
+	\text{alt 4}\\
+	\text{alt 5}\\
+	\end{array}$
+	\item $4)5)$ (alt)\\
+	$(2) d_{ik} = \left( \begin{array}{ccc}
+	0 & 3,02 & 2,64\\
+	3,02 & 0 & 3,82\\
+	2,64 & 3,82 & 0\\
+	\end{array} \right) \begin{array}{c}
+	1+2\\
+	3\\
+	4+5\\
+	\end{array}
+	$
+	\item $1)2) + 4)5)$\\
+	$(3) d_{ik} = \left( \begin{array}{cc}
+	0 & 3,42\\
+	3,42 & 0\\
+	\end{array} \right) \begin{array}{c}
+	1,2+4,5\\
+	3\\
+	\end{array}$
+	\item Dendrogramm\\
+	Interpretation (2) AB,DE,C; junge, alte, kreative (3) ABDE,C; "`Normale"'
+	%TODO 2016-05-10T12:20
+	\end{enumerate}
+\end{enumerate}
+
+\subsection{Prognose- und Entscheidungsprobleme}
+\subsubsection{Anzahl von Fehlern}
+\subparagraph{Beispiel} Korrekturlesen einer Arbeit\\
+Gesamtfehler (Anzahl): $E$\\
+Fehler, die 1. Korrekturleser entdeckt: $A$\\
+Fehler, die 2. Korrekturleser entdeckt: $B$\\
+Fehler die 1. und 2. Korrekturleser entdeckt: $C$\\
+Noch nicht gefundene Fehler $\Delta F$
+\[ \Delta F = E - A -B + C \]
+Wahrscheinlichkeit, dass 1. Fehler fand: $p= \frac{A}{E} , A = pE$\\
+Wahrscheinlichkeit, dass 2. Fehler fand: $q = \frac{B}{E}, B=qE$\\
+$r=\frac{C}{E} = P(\text{"`1"'} \cap \text{"`2"'}) \underbrace{=}_{\text{Unabh.}} P(\text{"`1"'}) \cdot P(\text{"`2"'}) = pq$\\
+Andererseits $AB = (pE) (qE) = pqE^2; CE = pqE^2$\\
+$\rightarrow AB = CE \curvearrowright E = \frac{AB}{C}$\\
+Folglich $\Delta F = \frac{AB}{C} - A - B + C = \frac{AB - AC - BC + C^2}{C} = \frac{A(B-C)+ C(B-C)}{C} = \frac{(A-C)(B-C)}{C}$
+
+\subsubsection{Statistische Zukunftsabschätzungen}
+"`Kopernikanisches Prinzip"': Prinzip der Mittelmäßigkeit\\
+$\sim$ Gleichverteilung
+\[ t_1 = t_{\text{verg.}} + t_{\text{zukunft}}\]
+$\tau = \frac{t_{ver}}{t_{ver} + t_{zuk}} \in (0;1)$ Zufallszahl\\
+$P(\frac{\alpha}{2} \leq \tau \leq 1- \frac{\alpha}{2}) = 1 - \alpha \quad \tau$-Irrtumswahrscheinlichkeit\\
+$\frac{\alpha}{2} \leq \tau \leq 1 - \frac{\alpha}{2}$\\
+$\frac{2}{\alpha} \geq \underbrace{\frac{t_{ver} + t_{zuk}}{t_{ver}}}_{1+ \frac{t_{zuk}}{t_{ver}}} \geq \frac{2}{2 - \alpha} | -1$\\
+$\underbrace{\frac{2}{\alpha}-1}_{\frac{2-\alpha}{\alpha}} \geq \frac{t_{zuk}}{t_{ver}} \geq \underbrace{\frac{2}{2-\alpha} -1}_{\frac{2-(2-\alpha)}{2-\alpha} = \frac{\alpha}{2-\alpha}}$\\
+$\frac{\alpha}{2-\alpha} \leq \frac{t_{zuk}}{t_{ver}} \leq \frac{2-\alpha}{\alpha}$\\
+$\alpha = 0,5: \frac{1}{3} \leq \frac{t_{zuk}}{t_{ver}} \leq 3 \curvearrowright \frac{1}{3} t_{ver} \leq t_{zuk} \leq 3 t_{ver}$\\
+$\alpha = 0,05 : \frac{1}{39} \leq \frac{t_{zuk}}{t_{ver}} \leq 39 \curvearrowright \frac{1}{39} t_{ver} \leq t_{zuk} \leq 39 t_{ver}$
+\subparagraph{Beispiel} J.R. Gott 1969 Berlin
+\begin{enumerate}
+\item Mauer $\alpha = 0,5 : [ \frac{8}{3}; 24J]$
+\item Hitler 1934 "`Tausendjähriges Reich"'
+\item Broadway "`1993"': "`Cats"' 10J
+\item Diskrete Ereignisse: Scheiffsreisen, u.ä.
+\end{enumerate}
+Prognose: Dauer der Menscheit
+
+\subsubsection{Sekretärinnenproblem}
+Aufgabe: Besten von $n$ Bewerbern finden bei sofortigen Entscheidungen\\
+Optimale Strategie
+\begin{enumerate}
+\item $r$ von $n$ Kandidaten ansehen ($r < n$) und ablehnen
+\item Ersten der verbleibenden $n-r$ Kandidaten wählen, der besser ist als der Beste der $r$ Vorgänger
+\end{enumerate}
+Ges: $r$ so, dass Wahrsch. Besten zu finden $\rightarrow$ Max
+
+Lösung: $B$-"`Bester gefunden"'\\
+$A_k$-"`Bester ist an der Stelle k"'\\
+$P(B) = \sum\limits_{i=1}^{n} P(A_k) P(B|A_k)$ mit $P(A_k)$\\
+mit $P(A_k) = \frac{1}{n}, k=1,\dots,n$\\
+$P(B|A_k) = \left\{ \begin{array}{ccc} 0 & \text{für} & k \leq r\\ \frac{r}{k-1} & \text{für} & k > r^{*)} \\ \end{array} \right.$\\
+$\curvearrowright P(B) = \sum\limits_{k=r+1}^n \frac{1}{n} \frac{r}{k-1} = \frac{r}{n} \sum\limits_{k=r}^{n-1} \frac{1}{k} \approx \frac{r}{n} \int\limits_r^n \frac{1}{x} \; dx = \frac{r}{n} \ln x |_r^n = \frac{r}{n} \ln \frac{n}{r} = \frac{r}{n} \ln (\frac{r}{n})^{-1} = \frac{r}{n} \ln \frac{r}{n} \rightarrow$ Max!\\
+$f(x) = \frac{1}{x} , x \in [r;n]$\\
+$\frac{r}{n} =: t : g(t) = -t \ln t \rightarrow$ Max\\
+$g'(t) = - \ln t  - \frac{t}{t} = 0$\\
+$-\ln -1 = 0$\\
+$-1 = \ln t$\\
+$t = e^{-1}$\\
+D.h. $\frac{r}{n} = \frac{1}{e} \curvearrowright r = \frac{n}{e}$ (37 \% Regel) r zweitbester
+
+\subparagraph{Modifizierte Aufgabe} $r$ so, dass nur möglichst guter Kandidat gewählt wird $\sim$ Simulation\\
+$n=100$ vorgegeben\\
+$B_j$ Platz des Ausgewählten "`Gute"'
+\[ B_j \min\limits_{1 \leq r \leq n} \frac{1}{m} \sum\limits_{j=1}^m B_j (r) = M\]
+
+\subsubsection{Sammelbildproblem}
+Aufgabe: Serie mit $n$ verschiedenen Motiven: Vollständig!\\
+Annahme: Gleichverteilung!
+$x_i$ - nach $(i-1)$ verschiedene Karten: neue $i$-te \\
+$p_1 = P(X_1 = 1) =1$\\
+$p_2 = P(X_2=1)= \frac{n-1}{n} $\\
+$p_i = P(X_i = 1) = \frac{n-(i-1)}{n}\quad i = 1,2,\dots n$\\
+$P(X_i = k) = (1-p_i)^{k-1} p_i$ geometr. Verteilung\\
+dabei $E(X_i) = \frac{1}{p_i} = \frac{n}{n-(i-1)}$\\
+$var(X_i) = \frac{1}{p_i^2} -  \frac{1}{p_i}$\\
+Gesamtversuche $X = \sum\limits_{i=1}^n X_i$\\
+$\curvearrowright \mu = E(x) = E(\sum\limits_{i=1}^{n} X_i) = \sum\limits_{i=1}^n E(x_i) = \frac{n}{n} + \frac{n}{n-1} + \frac{n}{n-2} + \dots + \frac{n}{2} + \frac{n}{1}$\\
+$= n( \frac{1}{n} + \frac{1}{n-1} + \dots + \frac{1}{2} + \frac{1}{1} ) = n \underbrace{\sum\limits_{i=1}^n \frac{1}{i}}_{H_n} \approx n (\ln{(n)} + 0,577)$\\
+$\sigma^2 = var(x) : \sum\limits_{i=1}^n \frac{1}{p_i^2} = (\frac{n}{n})^2 + (\frac{n}{n-1})^2 + \dots + (\frac{n}{1})^2 = n^2 \sum\limits_{i=1}^n \frac{1}{i^2} \approx n^2 [ \frac{\pi^2}{6} - \frac{1}{n+1}]$\\
+$\curvearrowright \sigma^2 \approx n^2 [ \frac{\pi^2}{6} - \frac{1}{n+1} ] - n [ \ln n + 0,577]$
+
+
+%TODO 2016-05-24
+
+%B)
+Logistisches Wachstum
+%...
+Andere Herleitung: In (1): $\lambda = \gamma - \tau$\\
+$\gamma$ Geburtenrate, $\tau$ Todesrate\\
+In (1): $\frac{dP}{dt} = (\gamma - \tau)P = \gamma P - \tau P - \tau P^2 \Rightarrow \frac{dP}{dt} = \gamma P - \tau P^2 (4')$ mit $\gamma = \lambda K, \tau = \lambda \Rightarrow K = \frac{\gamma}{\tau}$\\
+
+Untersuchung von (4):
+\begin{itemize}
+\item Ende des Wachstums: $\frac{dP}{dt} = 0 \rightarrow K=P$
+\item $P(t)$ wächst streng, falls $P_0 < K$
+\item $P(t)$ sinkt stetig, falls $P_0 > k$
+\item Änderungsrate $\dot{P} = \frac{dP}{dt} \rightarrow \ddot{P} = \lambda \dot{P} (K-P) - \lambda P\dot{P} = \lambda \dot{P} (K-2P) > 0$\\
+Für $P_0 < \frac{K}{2} : \ddot{P} > 0 : \dot{P}\uparrow$\\
+$P_0 > \frac{K}{2} : \ddot{P} < 0 : \dot{P} \downarrow$
+\end{itemize}
+
+%20160531 3.1.4 Gleichgewichtsprobleme
+\subsubsection{Gleichgewichtsprobleme}
+\paragraph{Räuber-Beute-Modell}
+$B$- Beutepopulation
+$R$- Räuberpopulation
+
+%...
+
+Analog $B= \alpha_2 B - \beta_2 RB  \quad (\alpha_k,\beta_k > 0)$\\
+Anfangsbed. $R(0) = R_0 , B(0) = B_0 (1b)$\\
+Dgl.-System; nicht linear
+\subparagraph{Wettbewerbsmodell}
+2 Populationen $P_1,P_2$; beschränkte völlig verschiedene Ressourcen $R_1,R_2 \Rightarrow \dot{P_k} = \alpha_k P_k - \beta_k p_k^2 \quad K=1,2$ (logistische Gleichung)\\
+Falls Wettbewerb um Ressourcen: $R_1 = R_2$\\
+$\rightarrow \dot{P_1} = \alpha_1 P_1 - \beta_1 P_1^2 - \gamma_1 P_1 P_2$\\
+$\dot{P_2} = \alpha_2 P_2 - \beta_2 P_2^2 - \gamma_2 P_1 P_2$\\
+mit $P_1(0) = P_{10} , P_2(0) = P_{20}$
+
+\subparagraph{Qualitative Theorie}
+$R \triangleq x, B \triangleq y$:\\
+$\dot{X} = - \alpha_1 x + \beta_1 xy$ (3a)\\
+$\dot{Y} = \alpha_2 y - \beta_2 xy$\\
+mit $X(0) = x_0, Y(0) = y_0$(3b)\\
+Lösung in Parameterdarstellung möglich: $x=x(t), y=y(t), t \geq 0$
+\begin{enumerate}
+\item Gibt es eine stationäre Population? (Trajektorie)\\
+D.h. $x(T) 0 \xi , y(t) = \eta$\\
+$\curvearrowright \dot{x}(t) = \dot{y}(t) = 0$\\
+In (3a): $-\alpha_1 \xi + \beta_1 \xi \eta = 0 \Leftrightarrow \xi (- \alpha_1 + \beta_1 \eta) = 0$\\
+$\alpha_2 \eta - \beta_2 \xi \eta = 0 \Leftrightarrow \eta ( \alpha_2 - \beta_2 \xi) = 0$\\
+$\curvearrowright \xi_1 = \eta_1 = 0$ entfällt\\
+$\Rightarrow \eta_2 = \frac{\alpha_1}{\beta_1} ; \xi_2 = \frac{\alpha_2}{\beta_2} \curvearrowright $ Gleichgewichtspunkt $(\xi_2,\eta_2)$
+
+\item Allgemein: Falls $\dot{x}(t_0) = \dot{y} (t_0) = 0 \rightarrow$ Stationärer Fall!\\
+Folglich $\dot{x}^2 (t_0) + \dot{y}^2 (t_0) > 0$\\
+Annahme: $\dot{x}(t_0) \neq 0$ (anderer Fall: analog!)
+\begin{itemize}
+	\item $\dot{x} (t) \neq 0$ in Umgebung von $t_0$
+	\item $y(t)$ kann als Funktion von $x(t)$ aufgefasst werden
+\end{itemize}
+$\frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}} = \frac{\alpha_2 y - \beta_2 xy}{-\alpha_1 x + \beta_1 xy} = \frac{\alpha_2 - \beta_2 x}{x} \frac{y}{-\alpha_1 + \beta_1 y}$
+
+Trennung der Variablen $| \cdot dx | \cdot \frac{-\alpha_1 + \beta_1 y}{y}$\\
+$\frac{-\alpha_1 + \beta_1 y}{y} \, dy = \frac{\alpha_2 - \beta_2 x}{x}\, dx$\\
+$\int \frac{-\alpha_1 + \beta_1 y}{y} \, dy = \int \frac{\alpha_2 - \beta_2 x}{x} \, dx$\\
+$-\alpha_1 \ln y + \beta_1 y = \alpha_2 \ln x - \beta_2 x + c$(4)
+
+\item Schlußfolgerungen, Bsp:\\
+$\alpha_1 = 0,008; \alpha_2 = 1,0$\\
+$\beta_1 = 0,000001, \beta_2 = 0,002$\\
+$x(0) = 500; y(0) = 700$\\
+Trajektorie lässt sich numerisch generieren!
+
+%Kreislauf
+
+Interpretation der Trajektorie:
+\begin{enumerate}
+\item minimale Raubpopulation $R$: $B\uparrow \Rightarrow R \uparrow$
+\item $R$ übermächtig $B \downarrow$
+\item Schwindene Nahrungsvorräte für $R: R \downarrow$
+\item Schonzeit für $B: B \uparrow$
+\end{enumerate}
+
+\item Umlaufzeit
+Durschnittliche Größe von $x(R)$ und $y(B)$:
+$\bar{x} := \frac{1}{T} \int\limits_0^T x(t) \, dt , \bar{y} := \frac{1}{T} \int\limits_0^T y(t) \, dt$\\
+Betrachten $\int\limits_0^T (\alpha_2 - \beta2 x ) \, dt = \int\limits_0^T \frac{\dot{y}}{y} \, dt = \ln y |_0^T \underbrace{=}_{y(T) = y(0)} 0$\\
+$\dot{y} = \alpha_2 y - \beta_2 xy $\\
+$\Rightarrow \int\limits_0^T \alpha_2 \, dt = \beta_2 \int\limits_0^T x \, dt$\\
+$\alpha_2 T = \beta_2 \int\limits_0^T x(t) \, dt \curvearrowright \int\limits_0^T x(t) \, dt = \frac{\alpha_2 T}{\beta_2}$\\
+$\Rightarrow \bar{x} = \frac{\alpha_2}{\beta_2}$ Analog: $\bar{y} = \frac{\alpha_1}{\beta_1}$\\
+Fazit: Um $(\frac{\alpha_2}{\beta_2}, \frac{\alpha_1}{\beta_1})$ kreist Trajektorie
+
+\end{enumerate}
+
+
+\subsubsection{Partielle Differentialgleichungen}%3.2.
+
+\subparagraph{Beispiel} $z=z(x,y) z_x = h(y) | \int \dots dx$\\
+$z= \int h(y) \, dx = h(y) x + g(y)$
+
+Fazit: Lösungen sind abhängig von beliebigen Faktoren
+
+\subsubsection{Wichtige partielle Dgl} %4.1.2.
+Grundlage: Erhaltungssätze
+
+Gebiet Quantität von $u$ in $G$\\
+Änderung von $u$ =  Fluss durch den Randvon $G$ + Entstehen bzw. Versiegen im Inneren
+
+$\mathbb{R}^3 : \frac{\partial u}{\partial t} + div \Phi = f(t,x,y,z)$ mit $\Phi = \left( \begin{array}{c} \Phi_1 \\ \Phi_2 \\ Phi_3 \\ \end{array} \right)$ Fluss der Quantität, $f= (t,x,y,z)$ Quellen/Senken in $G$
+
+Transport oder Korrektion
+$\Phi = \Phi (u) = \left\{ \begin{array}{c} (\Phi_1 (u) , \Phi_2 (u), \Phi_3 (u))^T \text{ nicht linear} \\ z(x,y,z)^T u \text{ - linear} \\ \end{array} \right.$\\
+
+mit $z(x,y,z) = \left\{ \begin{array}{c} z = \left( \begin{array}{c} c_1 \\ c_2 \\ c_3\\ \end{array} \right) \text{ homogene Mat.} \\ \neq z  \text{ inhomog. Mat.}\\ \end{array} \right.$
+
+Beispiel: Lineare Konvenktionsgleichung mit homogenen Materialien in $\mathbb{R}^2$
+
+\paragraph{Diffusion}
+$\Phi = -D \grad u$ ($D$ - Diffusionskonstante)\\
+$\rightarrow \frac{\partial u}{\partial t} + \div (-D \grad u) = f(t,x,y,z)$\\
+Dabei $\div (\grad u) = \div \left( \begin{array}{c} u_x \\ u_y \\ u_z \\ \end{array} \right) = \frac{\partial u_x}{\partialx} + \frac{\partial u_y}{\partial y} + \frac{\partial u_z}{\partial z} = u_{xx} + u_{yy} + u_{zz} =: \Delta u$ Laplace-Operator d.h.
+
+
+
+
+
+
+
+
+
+
+\end{document}
